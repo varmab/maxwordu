@@ -1,2 +1,0 @@
-# maxwordu
-MaxWord Universal App
