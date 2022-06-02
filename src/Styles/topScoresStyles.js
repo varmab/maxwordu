@@ -33,33 +33,30 @@ container: {
     flex:1,
     paddingHorizontal:0
   },
-  footer:{
+  footer: {
+   
     height:'15%',
-    justifyContent:'center',
-    alignItems:'center',
-    position:'relative',
-    paddingHorizontal:0,
     
+    
+    
+    marginBottom:0,
   },
-  row:{
-    flex:1.5,
-    flexDirection:'row',
-    height:'70%',
-    paddingHorizontal:0
-
-
+  row: {
+    flex: 1,
+    width:windowSize.width/6,
+    flexDirection: 'row'
   },
-  subRow:{
-    flex:0.35,
-    backgroundColor:'#34475d',
+  subRow: {
+    width:'50%',
+    backgroundColor: '#34475d',
     height:'70%',
-    paddingHorizontal:0
+    borderRadius:20
   },
-  subRow1:{
-    flex:0.35,
-    backgroundColor:'#27ae61',
+  subRow1: {
+    width:"50%",
+    backgroundColor: '#27ae61',
     height:'70%',
-    paddingHorizontal:0
+    borderRadius:20
   },
   Text:{
     textAlign:'center',

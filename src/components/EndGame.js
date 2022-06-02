@@ -43,7 +43,7 @@
 import {
   View,
   StyleSheet,
-  Text,
+  
   Image,
   TextInput,
   TouchableOpacity,
@@ -61,6 +61,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import {ShareDialog, canShow} from 'react-native-fbsdk'
 import axios from 'axios';
+import { Card, Text } from 'react-native-paper';
+
 
 var windowSize = Dimensions.get('window');
 
@@ -269,14 +271,14 @@ export class EndGame extends Component {
   render() {
     // console.log(this.props.route.params,"df");
     return (
-      <View style={{ flex: 1, }}>
+      <Card style={{ flex: 1, }}>
         <Header
           showBack
           onBackPress={() => this.props.navigation.navigate("Main")}
           title={'MaxWord'}
         />
-        <View style={[styles.container, {}]}>
-          <View style={styles.header}>
+        <Card.Content style={[styles.container, {}]}>
+          <Card.Content style={styles.header}>
             <View style={{ width: windowSize.width, }}>
               <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Text allowFontScaling={false} style={styles.gameOver}>Game Over!</Text>
@@ -323,7 +325,7 @@ export class EndGame extends Component {
                 </View>
               </View>
             </View>
-          </View>
+          </Card.Content>
           <View style={{ width: windowSize.width, marginVertical:50}}>
             <View style={{ flexDirection: 'row', marginTop:50 }}>
               <View style={{ width: '50%' ,}}>
@@ -366,21 +368,21 @@ export class EndGame extends Component {
               <InCorrectListView data={this.props.route.params.Incorrect} />
             </View>
           </View>
-          <View style={[styles.footer, { justifyContent: 'center', alignItems: 'center' }]}>
+          <Card.Content style={[styles.footer]}>
             <View style={styles.row}>
-              <TouchableOpacity style={styles.subRow} onPress={this.myScores.bind(this)}>
+              <TouchableOpacity style={[styles.subRow,{marginRight:'5%',marginLeft:'70.5vh'}]} onPress={this.myScores.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>My Scores</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.subRow1} onPress={this.option.bind(this)}>
+              <TouchableOpacity style={[styles.subRow1,{marginRight:'5%'}]} onPress={this.option.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Options</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.subRow} onPress={this.reStart.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </View>
-      </View>
+          </Card.Content>
+        </Card.Content>
+      </Card>
     )
   }
 }

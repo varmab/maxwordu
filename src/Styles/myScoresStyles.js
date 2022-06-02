@@ -28,12 +28,13 @@ var styles = StyleSheet.create({
     flex: 0.85,
   },
   footer: {
+   
     height:'15%',
     justifyContent:'center',
     alignItems:'center',
-    position:'relative',
-    paddingHorizontal:0,
-    marginBottom:10
+    
+    
+    marginBottom:0,
   },
   thumbnail: {
     height: 250,
@@ -47,25 +48,31 @@ var styles = StyleSheet.create({
     marginLeft: 8,
   },
   row: {
-    flex: 1.5,
+    flex: 1,
+    width:'15%',
     flexDirection: 'row'
   },
   subRow: {
-    flex: 1.5,
+    width:'50%',
     backgroundColor: '#34475d',
-    height:'70%'
+    height:'70%',
+    marginLeft:'15%',
+    marginRight:'10%',
+    borderRadius:20
   },
   subRow1: {
-    flex: 1.5,
+    width:'50%',
     backgroundColor: '#27ae61',
-    height:'70%'
+    height:'70%',
+    borderRadius:20
   },
   Text: {
     textAlign: 'center',
     marginTop: Margin,
     fontSize: FONT,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
+    
   },
   textHeader: {
     paddingTop: 20,
