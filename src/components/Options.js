@@ -1110,12 +1110,7 @@ export default class Options extends Component {
               </View>
             </View>
 
-            {/* <View style={{marginTop:3}}>
-            <AdMobBanner
-              bannerSize={this.state.bannerSize}
-              testDeviceID="EMULATOR"
-              adUnitID="ca-app-pub-7238183882077023/7178259794"/>
-          </View> */}
+          
             <Modal
               style={[styles.modal, styles.modal3]}
               position={"center"}
