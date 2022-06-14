@@ -147,7 +147,7 @@ class MyScores extends Component {
   }
   _renderRow(data) {
     return (
-      <Card>
+      <>
         <Card.Content style={styles.ListContainer}>
           <View style={styles.subContainer}>
             {data.item.Name == null ? (
@@ -166,7 +166,7 @@ class MyScores extends Component {
           </View>
         </Card.Content>
         <Divider style={{ backgroundColor: 'gray' }} />
-      </Card>
+      </>
     )
   }
 

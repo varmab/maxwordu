@@ -138,6 +138,16 @@ var styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
+
+  nameCard:{
+    alignItems:'center',
+    marginTop:20
+
+  },
+  cityCard:{
+    alignItems:'center',
+    marginTop:10
+  }
 });
 
 export default styles;

@@ -1,14 +1,3 @@
-// // import endGame from './endGame';
-
-
-
-// // import { AdMobInterstitial, AdMobBanner } from 'react-native-admob';
-
-// // import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
-// // let tracker = new GoogleAnalyticsTracker('UA-86654723-1');
-// // tracker.trackScreenView('Play Now');
-
-
 import React, { Component } from 'react';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import {
@@ -23,15 +12,14 @@ import {
     ScrollView,
     Dimensions,
     Platform,
+    FlatList,
+    
 } from 'react-native'
 import styles from './../Styles/playStyles';
-import { Card, Portal, Modal } from 'react-native-paper';
+import { Card, Portal, Modal, Button } from 'react-native-paper';
 import Header from './Header';
-//import Modal from 'react-native-modalbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TimerMixin from 'react-timer-mixin';
-//import SQLite from 'react-native-sqlite-storage';
-
 import GLOBAL from './Globals';
 import axios from "axios";
 import Words from '../../assets/Word1';
@@ -40,17 +28,21 @@ import Words from '../../assets/Word1';
 
 
 var windowSize = Dimensions.get('window');
-var height = windowSize.width / 1.3
+var height = windowSize.height 
 var SIZE = 4; // four-by-four grid
-var Cell = windowSize.width * .2
-var CELL_SIZE = 120; // 20% of the screen width
-var CELL_PADDING =0 // 5% of the cell size
-var BORDER_RADIUS = CELL_PADDING * 2;
-var TILE_SIZE = CELL_SIZE - CELL_PADDING * 5;
-var LETTER_SIZE = Math.floor(TILE_SIZE * .75);
-var rows = [0, 1, 2]
-var columns = [0, 1, 2, 3]
-var id = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+var CELL_SIZE = 100; // 20% of the screen width
+var WIDTH=0
+if(Platform.OS!='web'){
+  WIDTH=Dimensions.get('window').width/4
+    console.log(WIDTH,'ios')
+}else{
+    WIDTH=Dimensions.get('window').width/8
+    console.log(WIDTH,'web')
+}
+
+
+
 
 
 var FONT = 16;
@@ -101,7 +93,8 @@ class Play extends React.Component {
             animated: false,
             transparent: false,
             visible: false,
-            bannerSize: 'smartBannerPortrait'
+            bannerSize: 'smartBannerPortrait',
+            visibleCross:false
         }
         this.refs = React.createRef();
     }
@@ -187,9 +180,9 @@ class Play extends React.Component {
         this.refs.modal3.close();
     }
     tick() {
-        // console.log('lll');
+      
         this.doLettersValue();
-        // this.doRemoveLetters()
+    
     }
 
     componentDidMount() {
@@ -250,6 +243,12 @@ class Play extends React.Component {
             color: 'red'
         }
     }
+    generateColor() {
+        const randomColor = Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, '0');
+        return `#${randomColor}`;
+      };
     doLettersValue() {
         var x = windowSize.width / 4
         var r = Math.floor(Math.random() * this.state.unusedLetters.length);
@@ -370,23 +369,25 @@ class Play extends React.Component {
     }
 
     renderTiles() {
-        // console.log("array%%%%%%%:" + this.state.word)
+       
         var result = [];
-        var col = [0, 1, 2, 3]
-        var row = [0, 1, 2]
+        
         var i = 0;
         for (var row = 0; row < 3; row++) {
             for (var col = 0; col < 4; col++) {
                 var key = row * SIZE + col;
                 var letter = this.state.word
+                console.log("array%%%%%%%:" + (row * SIZE + col))
                 var position = {
-                    left: col * CELL_SIZE + CELL_PADDING,
-                    top: row * CELL_SIZE + CELL_PADDING
+                    left: col * CELL_SIZE,
+                    top: row * CELL_SIZE 
                 };
                 result.push(
-                    <TouchableOpacity disabled={this.state.disabled} key={key} onPress={this.press.bind(this, letter[i])} style={[styles.tile, position]}>
+                    <Card>
+                    <TouchableOpacity disabled={this.state.disabled} key={key} onPress={this.press.bind(this, letter[i])} style={[styles1.gridBox, position]}>
                         <Text allowFontScaling={false} style={styles.letter}>{letter[i]}</Text>
                     </TouchableOpacity>
+                    </Card>
                 );
                 i++
             }
@@ -400,14 +401,17 @@ class Play extends React.Component {
         }
 
     }
+    
     wrongWord() {
-        console.log(windowSize.width,windowSize.height),'wrongword function';
-        { windowSize.width == 320 ? (height = windowSize.height / 3.2) : windowSize.width == 375 ? (height = windowSize.height / 2.62) : (height = windowSize.height / 2.4) }
+        console.log(windowSize.width,windowSize.height,'wrongword function');
+        { windowSize.width == 1906 ? (height = windowSize.height / 2) : windowSize.width == 375 ? (height = windowSize.height / 2.62) : (height = windowSize.height / 2.4) }
         return {
-            fontSize: windowSize.width / 2,
+            fontSize: WIDTH,
             textAlign: 'center',
             height: height,
             color: 'red',
+            justifyContent:'center',
+            alignItems:'center'
            
             
         }
@@ -430,7 +434,8 @@ class Play extends React.Component {
             var Incorrect = this.state.incorrectWords
             var wrong = this.state.incorrectWords
             this.setState({
-                wrong: wrong
+                wrong: wrong,
+                visibleCross:true
             })
             this.state.value
             for (var i = 0, n = words.length; i < n; i++) {
@@ -502,12 +507,7 @@ class Play extends React.Component {
                     transparent: false,
                     visible: false,
                 }, () => {
-                    // this.props.navigator.push({
-                    //     name: 'End Game',
-                    //     component: endGame,
-                    //     title: 'MaxWord',
-                    //     passProps: { correct, time, Incorrect, Level, Name, Points, scores, userId, City, udId }
-                    // });
+                    
                     this.props.navigation.navigate("End Game", { correct, time, Incorrect, Level, Name, Points, scores, userId, City, udId })
                 })
             }).catch((err)=>{console.log(err)})
@@ -528,111 +528,127 @@ class Play extends React.Component {
             visible: false,
         }, () => {
             this.props.navigation.navigate("End Game", { correct, time, Incorrect, Level, Name, Points, scores, City })
-            // this.props.navigator.push({
-            //     name: 'End Game',
-            //     component: endGame,
-            //     title: 'MaxWord',
-            //     passProps: { correct, time, Incorrect, Level, Name, Points, scores, City }
-            // });
+            
         })
     }
+    
     render() {
-        //alert("height:"+(windowSize.height/2.2-160))
-        // var height = windowSize.height / 2.2
+       
         return (
-            <Card style={{ flex: 1 }}>
+             <Card style={{ flex: 1 }}>
                 <Header
                     showBack
                     onBackPress={() => this.props.navigation.navigate("Main")}
                     title={'MaxWord'}
                 />
-                <View style={styles.container}>
-                    <View style={{ width: windowSize.width, height: 50 }}>
-                        <View style={styles.headerRow}>
-                            <View style={{ height: 50, marginLeft:'35%' }}>
-                                <Text allowFontScaling={false} style={styles.Correct}>Score:{this.state.Score}</Text>
-                            </View>
-                            <View style={{ height: 50,textAlign:'center',marginLeft:'6.5%' }}>
-                                <Text allowFontScaling={false} style={styles.Level}>{this.state.Level}</Text>
-                            </View>
-                            <View style={{  height: 50 ,marginLeft:'5.5%' }}>
-                                <Text allowFontScaling={false} style={styles.Time}>Time: {this.state.timeDisplay}</Text>
+
+                
+                <Card.Content style={styles.headerRow}>
+                    <Card.Content style={{ height: 50, marginLeft:'34%',alignItems:'flex-start' }}>
+                        <Text allowFontScaling={false} style={styles.Correct}>Score:{this.state.Score}</Text>
+                    </Card.Content>
+                    <Card.Content style={{ height: 50,textAlign:'center',marginLeft:'9%',marginRight:'5%' }}>
+                        <Text allowFontScaling={false} style={styles.Level}>{this.state.Level}</Text>
+                    </Card.Content>
+                    <Card.Content style={{  height: 50 ,marginLeft:'5.5%' }}>
+                        <Text allowFontScaling={false} style={styles.Time}>Time: {this.state.timeDisplay}</Text>
+                    </Card.Content>
+                </Card.Content>
+                
+            <Card style={{flex:1,justifyContent:'center',alignItems:'center '}}>
+            <Card.Content  style={{flex:1,flexWrap:'wrap',padding:2,}}>
+            
+            <FlatList
+            
+            data={this.state.word}
+            
+            renderItem={({ item }) => 
+            
+            <TouchableOpacity  disabled={this.state.disabled}  onPress={this.press.bind(this, item)}>
+            <Card.Content style={styles1.gridBox} >
+            <Text style={styles1.GridViewTextLayout} >
+            {item}
+            </Text>
+            </Card.Content>
+            </TouchableOpacity>
+            
+            }
+            numColumns={4}
+            
+            />
+            
+            </Card.Content>
+            {this.state.wrong == 'yes' ? (
+                
+                <Modal visible={this.state.visibleCross} 
+                style={{ justifyContent:'center',alignItems:'center',backgroundColor: 'transparent'}}>
+                    <Text allowFontScaling={false} style={this.wrongWord()}>X</Text>
+                </Modal>
+               ) : (
+                <View></View>
+            )}
+
+            
+           
+          </Card>
+          
+          
+
+          <Card style={{justifyContent:'center',alignItems:'center'}}>
+          <Card.Content>
+          <Text style={{fontSize: 25}}>{this.state.value}</Text>
+          </Card.Content>
+          <View style={{height:1,width:WIDTH,backgroundColor:'black'}}></View>
+          </Card>
+
+          
+          <Card.Content style={{flexDirection:'row',justifyContent:'center',alignItems:'center' }}>
+              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH,backgroundColor:'#495159',borderRadius:15}} onPress={this.clear.bind(this)}>
+                <Text allowFontScaling={false} style={styles.Text}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH,backgroundColor:'#495150',borderRadius:15}} onPress={this.handleSubmit.bind(this)}>
+                <Text allowFontScaling={false} style={styles.Text}>Submit</Text>
+              </TouchableOpacity>
+            </Card.Content>
+            
+            <Portal theme={{ colors: { backdrop: 'rgba(0, 0, 0, 0.2)' } }}>
+            <Modal visible={this.state.visible}
+                //  onDismiss={hideModal}
+                style={{ flex: 1, justifyContent: 'center' }}
+                contentContainerStyle={{
+                    backgroundColor: 'transparent',
+                    width: '50%',
+                    height: '100%',
+                    alignSelf: 'center',
+                    
+                }}
+            >
+                <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', }}>
+                    <View style={{ marginTop: windowSize.height / 3, marginHorizontal: 10 }}>
+                        <View style={{ height: windowSize.height / 8, backgroundColor: 'white', }}>
+                            <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                                <Text allowFontScaling={false} style={{ textAlign: 'center', fontSize: 15 }}>Do you want to post your score to our site?</Text>
                             </View>
                         </View>
-                    </View>
-                    <View style={{ width:"50%", height:"50%",marginLeft:'35.5%' }}>
-                       <View style={{ flex: 1 }}> 
-                            {this.renderTiles()}
-                        </View>
-                        {this.state.wrong == 'yes' ? (
-                            <View style={{ backgroundColor: 'transparent' }}>
-                                <Text allowFontScaling={false} style={this.wrongWord()}>X</Text>
-                            </View>) : (
-                            <View></View>
-                        )}
-                    </View>
-                    <View style={{ width: windowSize.width, height: windowSize.height / 2.2 }}>
-                        <View style={{ width: windowSize.width, height: 40, flexDirection: 'row' }}>
-                            <View style={{ marginTop: 20, height: 50, width: windowSize.width , justifyContent: 'center', alignSelf: 'center', }}>
-                                <Text allowFontScaling={false} style={{ textAlign: 'center', fontSize: 25,marginRight:'3%' }}>{this.state.value}</Text>
-                                <View style={{ height: 1, marginLeft:'35.5%', width: windowSize.width/4  , backgroundColor: 'black' }}></View>
-                            </View>
-                           
-                        </View>
-                        <View style={{ width: windowSize.width, height: 10 }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <TouchableOpacity style={{ borderRadius:20,marginRight: "5%", marginLeft: "27.5%", marginTop: '5%', height: 80, width: windowSize.width / 6, backgroundColor: '#495159' }}
-                                    onPress={this.clear.bind(this)}>
-                                    <Text allowFontScaling={false} style={styles.Text}>Delete</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity disabled={this.state.disabled}
-                                    style={{ borderRadius:20,marginRight: 3, marginLeft: "2%", marginTop: '5%', height: 80, width: windowSize.width / 6, backgroundColor: '#495159' }}
-                                    onPress={this.handleSubmit.bind(this)}>
-                                    <Text allowFontScaling={false} style={styles.Text}>Submit</Text>
-                                </TouchableOpacity>
-                            </View>
-                           
-                        </View>
-                    </View>
-                    <Portal theme={{ colors: { backdrop: 'rgba(0, 0, 0, 0.2)' } }}>
-                        <Modal visible={this.state.visible}
-                            //  onDismiss={hideModal}
-                            style={{ flex: 1, justifyContent: 'center' }}
-                            contentContainerStyle={{
-                                backgroundColor: 'transparent',
-                                width: '50%',
-                                height: '100%',
-                                alignSelf: 'center',
-                                
-                            }}
-                        >
-                            <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', }}>
-                                <View style={{ marginTop: windowSize.height / 3, marginHorizontal: 10 }}>
-                                    <View style={{ height: windowSize.height / 8, backgroundColor: 'white', }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                                            <Text allowFontScaling={false} style={{ textAlign: 'center', fontSize: 15 }}>Do you want to post your score to our site?</Text>
-                                        </View>
+                        <View style={{ height: 50, }}>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <TouchableOpacity style={{ flex: 0.5, backgroundColor: '#27ae61' }} onPress={this.onYes.bind(this)} key={this.state.uuid} >
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                        <Text allowFontScaling={false} style={{ color: 'white', textAlign: 'center', fontSize: 20 }}>YES</Text>
                                     </View>
-                                    <View style={{ height: 50, }}>
-                                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                                            <TouchableOpacity style={{ flex: 0.5, backgroundColor: '#27ae61' }} onPress={this.onYes.bind(this)} key={this.state.uuid} >
-                                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                    <Text allowFontScaling={false} style={{ color: 'white', textAlign: 'center', fontSize: 20 }}>YES</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={{ flex: 0.5, backgroundColor: '#34475d' }} onPress={this.onNo.bind(this)}>
-                                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                    <Text allowFontScaling={false} style={{ color: 'white', textAlign: 'center', fontSize: 20 }}>NO</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ flex: 0.5, backgroundColor: '#34475d' }} onPress={this.onNo.bind(this)}>
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                        <Text allowFontScaling={false} style={{ color: 'white', textAlign: 'center', fontSize: 20 }}>NO</Text>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             </View>
-                        </Modal>
-                    </Portal>
+                        </View>
+                    </View>
                 </View>
-            </Card>
+            </Modal>
+        </Portal>
+        </Card>
         )
     }
 };
@@ -650,5 +666,42 @@ function removeDuplicateCharacters(string) {
     return promise;
 }
 
-//make this component available to the app
+
+
 export default Play;
+
+const styles1 = StyleSheet.create({
+    
+    GridViewContainer: {
+     flex:1,
+     
+     height: 100,
+     margin: 5,
+     backgroundColor: '#7B1FA2'
+  },
+  GridViewTextLayout: {
+     fontSize: 20,
+     fontWeight: 'bold',
+     justifyContent: 'center',
+     textAlign:'center',
+     color: '#fff',
+     padding: 10,
+   },
+   gridBox:{
+    margin:2,
+    width:WIDTH,
+    justifyContent:'center',
+    alignItems:'center',
+    height:height/6 ,
+    backgroundColor:'black',
+    position:'relative',
+    borderRadius: 10,
+    borderWidth:1,
+   },
+flatlist:{
+    position:'relative',
+    flex:1,
+    flexWrap:'wrap',
+    flexDirection:'row'
+}
+  });

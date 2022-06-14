@@ -233,14 +233,14 @@ export default class TopScores extends Component {
    
     
     return(
-      <Card.Content style={{ flex: 1, }}>
+      <View style={{ flex: 1, }}>
         <Header
           showBack
           onBackPress={() => this.props.navigation.navigate("Main")}
           title={'Pro Scores'}
         />
    
-        <Card.Content style={styles.container}>
+        <View style={styles.container}>
         <View style={styles.body}>
         <View style={{height:60}}>
           <View style={{flex:1,flexDirection:'row',backgroundColor:'#34475d'}}>
@@ -258,31 +258,31 @@ export default class TopScores extends Component {
             </View>
           </View>
         </View>
-        <Card.Content style={{paddingHorizontal:0,flex:1}}>
+         <View >
            <FlatList
             data={this.state.dataSource}
             renderItem={this._renderRow.bind(this)}
             keyExtractor={data => data.index}/>
             
-         </Card.Content>
+         </View>
         </View>
         
-        <Card.Content style={styles.footer}>
-          <Card.Content style={styles.row}>
-          <TouchableOpacity style={[styles.subRow,{marginRight:'5%',marginLeft:'75.5vh'}]} onPress={this.home.bind(this)}>
+        <View style={styles.footer}>
+          <View style={styles.row}>
+          <TouchableOpacity style={styles.subRow} onPress={this.home.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.subRow1,{marginRight:'5%'}]} onPress={this.reStart.bind(this)}>
+            <TouchableOpacity style={styles.subRow1} onPress={this.reStart.bind(this)}>
               <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.subRow,{}]} onPress={this.help.bind(this)}>
+            <TouchableOpacity style={styles.subRow} onPress={this.help.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Help</Text>
             </TouchableOpacity>
-          </Card.Content>
-        </Card.Content>
+          </View>
+        </View>
         
-      </Card.Content>
-      </Card.Content>
+      </View>
+      </View>
       );
   }
   

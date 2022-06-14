@@ -212,17 +212,16 @@ var styles = StyleSheet.create({
     color: 'black'
   },
   tile: {
-    flex:0.5,
-    position: 'absolute',
-    width:'12.7%',
-    height: '29.5%',
+     position: 'absolute',
+    width:windowSize.width/4+2,
+    height:height/3,
     borderRadius: 2,
-    borderWidth: 1,
+    borderWidth:1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#BEE1D2',
-    flexBasis:100,
-    flexWrap:'wrap'
+    
+    
   },
   modal3: {
     height: 150,
@@ -231,6 +230,23 @@ var styles = StyleSheet.create({
   modal: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  flatlist:{
+    flex:1,
+    marginVertical:50,
+    backgroundColor:"green",
+    borderStartWidth:1,
+    borderColor:'black',
+   
+    
+  },
+  tileText:{
+    justifyContent:'center',
+    textAlign:'center',
+    fontSize:18,
+    
+    
   }
+
 });
 export default styles;

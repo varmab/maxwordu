@@ -1,8 +1,7 @@
 import React from 'react-native';
 import {
   StyleSheet,
-  Dimensions,
-  Platform
+  Dimensions
 } from 'react-native'
 var windowSize = Dimensions.get('window').width;
 console.log(windowSize,'size');
@@ -36,38 +35,36 @@ container: {
   subBody:{
     flex:.5,
   },
-  footer: {
+  footer:{
+ 
+    height:'19%',
+    justifyContent:'center',
+    alignItems:'center',
+    position:'relative',
+    top:70
    
-    height:'20%',
     
-    
-    
-    marginBottom:0,
   },
-  row: {
-    flex: 1,
-    width:windowSize.width/8,
-    flexDirection: 'row'
+  row:{
+    flex:1.5,
+    flexDirection:'row'
   },
-  subRow: {
-    width:'10%',
-    backgroundColor: '#34475d',
-    height:'65%',
-    borderRadius:20
+  subRow:{
+    flex:0.35,
+    backgroundColor:'#34475d',
+    height:'70%'
   },
-  subRow1: {
-    width:"10%",
-    backgroundColor: '#27ae61',
-    height:'65%',
-    borderRadius:20
+  subRow1:{
+    flex:0.35,
+    backgroundColor:'#27ae61',
+    height:'70%'
   },
   Text:{
     textAlign:'center',
     marginTop:Margin,
     fontSize:FONT,
     fontWeight:'bold',
-    color:'white',
-    justifyContent:'center'
+    color:'white'
   },
   gameOver:{
     textAlign:'center',
@@ -87,7 +84,7 @@ container: {
     fontStyle:'italic',
     color:'#4B4C4D',
     marginLeft:'45%',
-    marginRight:'35%'
+    marginRight:'45%'
   },
   Time:{
     marginTop:8,

@@ -43,7 +43,7 @@
 import {
   View,
   StyleSheet,
-  
+  Text,
   Image,
   TextInput,
   TouchableOpacity,
@@ -61,8 +61,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import {ShareDialog, canShow} from 'react-native-fbsdk'
 import axios from 'axios';
-import { Card, Text } from 'react-native-paper';
-
+import { Card ,DataTable} from 'react-native-paper';
 
 var windowSize = Dimensions.get('window');
 
@@ -277,6 +276,7 @@ export class EndGame extends Component {
           onBackPress={() => this.props.navigation.navigate("Main")}
           title={'MaxWord'}
         />
+
         <Card.Content style={[styles.container, {}]}>
           <Card.Content style={styles.header}>
             <View style={{ width: windowSize.width, }}>
@@ -370,19 +370,21 @@ export class EndGame extends Component {
           </View>
           <Card.Content style={[styles.footer]}>
             <View style={styles.row}>
-              <TouchableOpacity style={[styles.subRow,{marginRight:'5%',marginLeft:'70.5vh'}]} onPress={this.myScores.bind(this)}>
+              <TouchableOpacity style={[styles.subRow,{borderRadius:5}]} onPress={this.myScores.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>My Scores</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.subRow1,{marginRight:'5%'}]} onPress={this.option.bind(this)}>
+              <TouchableOpacity style={[styles.subRow1,{borderRadius:5}]} onPress={this.option.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Options</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.subRow} onPress={this.reStart.bind(this)}>
+              <TouchableOpacity style={[styles.subRow,{borderRadius:5}]} onPress={this.reStart.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
               </TouchableOpacity>
             </View>
           </Card.Content>
         </Card.Content>
-      </Card>
+     
+   
+  </Card>
     )
   }
 }
@@ -434,3 +436,21 @@ class CorrectListView extends React.Component {
   }
 }
 export default EndGame
+
+const styles1 = StyleSheet.create({
+  card_container: {
+    
+    borderColor:'black',
+    borderWidth:1,
+    backgroundColor: '#ecf0f1',
+    
+    
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
+  },
+});
