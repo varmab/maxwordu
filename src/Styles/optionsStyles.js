@@ -147,6 +147,15 @@ var styles = StyleSheet.create({
   cityCard:{
     alignItems:'center',
     marginTop:10
+  },
+  chooseLeve:{
+    paddingTop:10,
+    paddingBottom:10
+  },
+  chooseLevelText:{
+    fontSize:20,
+    fontWeight:'bold',
+    
   }
 });
 

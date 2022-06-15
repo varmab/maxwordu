@@ -7,6 +7,7 @@ import {
   Alert,
   Dimensions,
   Keyboard,
+  Platform
 } from "react-native";
 import React, { Component } from "react";
 import { Card, Portal, TextInput } from "react-native-paper";
@@ -21,12 +22,11 @@ var FONT = 17;
 var Margin = 38;
 var textFont = 20;
 var height = 80;
-if (windowSize.width == 768) {
-  (FONT = 30), (Margin = 50), (textFont = 20);
+if (Platform.OS !='web') {
+  (FONT = 12), (Margin = 50), (textFont = 20);
   height = 120;
-} else if (windowSize.width == 320) {
-  textFont: 18;
-  height = 60;
+} else{
+  FONT=20
 }
 
 
@@ -234,7 +234,8 @@ export default class Options extends Component {
               </Text>
              
             </Card.Content>
-            <Card.Content styles={[styles.chooseLevel,{justifyContent:'center',textAlign:'center'}]}><Text styles={[styles.chooseLevelText,{justifyContent:'center',textAlign:'center'}]}>choose level</Text></Card.Content>
+            <Card style={{flex:1,justifyContent:'center',textAlign:'center',paddingTop:10}}>
+            <Card.Content style={[styles.chooseLeve]}><Text style={[styles.chooseLevelText]}>choose level</Text></Card.Content></Card>
             <Card.Content>
             
             <Card.Content style={styles.row1}>
@@ -409,6 +410,7 @@ export default class Options extends Component {
                   flexDirection: "row",
                   justifyContent: "center",
                   textAlign:'center',
+                  paddingTop:40
                 }}
               >
                 <TouchableOpacity
