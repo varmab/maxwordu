@@ -61,7 +61,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import {ShareDialog, canShow} from 'react-native-fbsdk'
 import axios from 'axios';
-import { Card ,DataTable} from 'react-native-paper';
+import { Card ,DataTable,Content,Title,Paragraph} from 'react-native-paper';
+import { CardAnimationContext } from '@react-navigation/stack';
 
 var windowSize = Dimensions.get('window');
 
@@ -270,118 +271,98 @@ export class EndGame extends Component {
   render() {
     // console.log(this.props.route.params,"df");
     return (
-      <Card style={{ flex: 1, }}>
+      <Card style={{ flex: 1,backgroundColor:'white' }}>
         <Header
           showBack
           onBackPress={() => this.props.navigation.navigate("Main")}
           title={'MaxWord'}
         />
 
-        <Card.Content style={[styles.container, {}]}>
-          <Card.Content style={styles.header}>
-            <View style={{ width: windowSize.width, }}>
-              <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
+        <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Text allowFontScaling={false} style={styles.gameOver}>Game Over!</Text>
-              </View>
-            </View>
-            <View style={{ marginTop: 20, width: windowSize.width }}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={{ width: '50%' }}>
-                  <Text allowFontScaling={false} style={styles.Score}>Score: {this.props.route.params.scores}</Text>
-                </View>
-                <View style={{ width: '50%' }}>
-                  {this.state.Rank == null ? (
-                    <Text allowFontScaling={false} style={styles.Score}>Rank: NA</Text>
-                  ) :
-                    <Text allowFontScaling={false} style={styles.Score}>Rank: {this.state.Rank}</Text>}
-                </View>
-              </View>
-            </View>
-            <View style={{ height: 30, width: windowSize.width }}>
-              <View style={{ flex: 1, flexDirection: 'row' }}>
-                <View style={{ flex: 0.5 }}>
-                  {windowSize.width != 768 ? (
-                    <Text allowFontScaling={false} style={styles.Level}>Level: {this.props.route.params.Level}</Text>
-                  ) : (
-                    <Text allowFontScaling={false} style={{ marginTop: 8, fontSize: textFont, fontStyle: 'italic', color: '#4B4C4D', marginLeft: 130, marginBottom: 5 }}>Level: {this.props.Level}</Text>
-                  )}
-                </View>
-                <View style={{ flex: 0.5 }}>
-                  <Text allowFontScaling={false} style={styles.Time}>Time: {this.props.route.params.time}</Text>
-                </View>
-              </View>
-            </View>
-            <View style={{ height: 30, width: windowSize.width }}>
-              <View style={{ flex: 1, flexDirection: 'row' }}>
-                <View style={{ flex: 0.5 }}>
-                  {windowSize.width != 768 ? (
-                    <Text allowFontScaling={false} style={styles.Correct}>Correct: {this.props.route.params.correct.length}</Text>
-                  ) : (
-                    <Text allowFontScaling={false} style={{ fontSize: textFont, fontStyle: 'italic', color: '#4B4C4D', marginLeft: 140 }}>Correct: {this.props.correct.length}</Text>
-                  )}
-                </View>
-                <View style={{ flex: 0.5 }}>
-                  <Text allowFontScaling={false} style={styles.Incorrect}>Incorrect: {this.props.route.params.Incorrect.length}</Text>
-                </View>
-              </View>
-            </View>
-          </Card.Content>
-          <View style={{ width: windowSize.width, marginVertical:50}}>
-            <View style={{ flexDirection: 'row', marginTop:50 }}>
-              <View style={{ width: '50%' ,}}>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  <Text allowFontScaling={false} style={{ textAlign: 'center', fontSize: 17, color: 'blue', textDecorationLine: 'underline' }} onPress={this.topScore.bind(this)}>Show Top Scores</Text>
-                </View>
-              </View>
-              <View style={{ width: '50%' }}>
-                <View >
-                  <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }} onPress={this.FB.bind(this)}>
-                     {windowSize.width == 768 ? (
-                    <Image style={{ width: 30, height: 30, marginLeft: 10, marginTop: 15 }} source={require('../../assets/facebook.png')} />
-                  ) : (
-                    <Image style={{ width: 30, height: 30, marginRight: 100, marginTop: 10, }} source={require('../../assets/facebook.png')} />
-                  )} 
-                    {windowSize.width != 768 ? (
-                      <View style={{ width: '80%', height: 50, }}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-                          <Text allowFontScaling={false} style={{ fontSize: 17, color: 'blue', textDecorationLine: 'underline' }} >Tell your friends about  MaxWord</Text>
-                        </View>
-                      </View>) : (
-                      <View style={{ width: '100%' }}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                          <Text allowFontScaling={false} style={{ fontSize: 17, color: 'blue', textDecorationLine: 'underline' }} >Tell your friends about MaxWord</Text>
-                        </View>
-                      </View>
-                    )}
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={{ flex: 0.50, flexDirection: 'row' }}>
-            <View style={styles.body}>
-              <Text allowFontScaling={false} style={styles.gameOver}>Correct</Text>
-              <CorrectListView data={this.props.route.params.correct} />
-            </View>
-            <View style={styles.subBody}>
-              <Text allowFontScaling={false} style={styles.gameOver}>Incorrect</Text>
-              <InCorrectListView data={this.props.route.params.Incorrect} />
-            </View>
-          </View>
-          <Card.Content style={[styles.footer]}>
-            <View style={styles.row}>
-              <TouchableOpacity style={[styles.subRow,{borderRadius:5}]} onPress={this.myScores.bind(this)}>
-                <Text allowFontScaling={false} style={styles.Text}>My Scores</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.subRow1,{borderRadius:5}]} onPress={this.option.bind(this)}>
-                <Text allowFontScaling={false} style={styles.Text}>Options</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.subRow,{borderRadius:5}]} onPress={this.reStart.bind(this)}>
-                <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
-              </TouchableOpacity>
-            </View>
-          </Card.Content>
+        </View>
+      <Card.Content style={[styles.row1,{justifyContent:'center',alignItems:'center'}]}>
+        
+        <Card.Content style={[styles.row1_column1]}>
+        <Card.Content style={[styles.shadowProp,styles.blue_column]}>
+        <Card.Content> <Text allowFontScaling={false} style={styles.Score}>Score: {this.props.route.params.scores}</Text></Card.Content>
+        <Card.Content><Text allowFontScaling={false} style={styles.Score}>Level: {this.props.route.params.Level}</Text></Card.Content>
+        <Card.Content> <Text allowFontScaling={false} style={styles.Score}>Correct: {this.props.route.params.correct.length}</Text></Card.Content>
         </Card.Content>
+        </Card.Content>
+        
+        
+        
+        <Card.Content style={[styles.row1_column2]}>
+        <Card.Content style={[styles.shadowProp,styles.green_column]}>
+        <Card.Content>  {this.state.Rank == null ? (
+          <Text allowFontScaling={false} style={styles.Score}>Rank: NA</Text>
+        ) :
+          <Text allowFontScaling={false} style={styles.Score}>Rank: {this.state.Rank}</Text>}</Card.Content>
+        <Card.Content><Text allowFontScaling={false} style={styles.Score} >Time: {this.props.route.params.time}</Text></Card.Content>
+        <Card.Content> <Text allowFontScaling={false} style={styles.Score}>Incorrect: {this.props.route.params.Incorrect.length}</Text></Card.Content>
+        </Card.Content>
+        </Card.Content>
+        
+      </Card.Content>
+
+
+      
+   
+      <View style={{ flex:0.4 ,flexDirection: 'row', marginTop:10 }}>
+        <View style={{ width: '50%' ,}}>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Text allowFontScaling={false} style={{ textAlign: 'center', fontSize: 17, color: 'blue', textDecorationLine: 'underline' }} onPress={this.topScore.bind(this)}>Show Top Scores</Text>
+          </View>
+        </View>
+        <View style={{ width: '50%' }}>
+          <View >
+            <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }} onPress={this.FB.bind(this)}>
+             
+                  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text allowFontScaling={false} style={{ fontSize: 17, color: 'blue', textDecorationLine: 'underline' }} ><Image style={{ width: 30, height: 30}} source={require('../../assets/facebook.png')} />Tell your friends about MaxWord</Text>
+                  </View>
+               
+              
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+   
+       
+          <Card style={{flex:1,backgroundColor:'white'}}>
+          <View style={{ flex: 0.50, flexDirection: 'row' }}>
+          <View style={styles.body}>
+            <Text allowFontScaling={false} style={styles.gameOver}>Correct</Text>
+            <CorrectListView data={this.props.route.params.correct} />
+          </View>
+          <View style={styles.subBody}>
+            <Text allowFontScaling={false} style={styles.gameOver}>Incorrect</Text>
+            <InCorrectListView data={this.props.route.params.Incorrect} />
+          </View>
+        </View>
+          </Card>
+      
+      
+        <Card style={[styles.footer,{backgroundColor:'white'}]}>
+        <Card.Content style={styles.row}>
+            <TouchableOpacity style={[styles.subRow,styles.shadowProp]}
+                onPress={this.myScores.bind(this)}
+            >
+                <Text allowFontScaling={false} style={styles.Text}>My Scores</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.subRow1,styles.shadowProp]}
+                onPress={this.option.bind(this)}
+            >
+                <Text allowFontScaling={false} style={styles.Text}>Options</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.subRow,styles.shadowProp]}
+                onPress={this.reStart.bind(this)}
+            >
+                <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
+            </TouchableOpacity>
+        </Card.Content>
+    </Card>
      
    
   </Card>

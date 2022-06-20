@@ -47,16 +47,17 @@ var styles = StyleSheet.create({
     marginLeft: 8,
   },
   row: {
-    flex: 1.5,
-    flexDirection: 'row'
+    flex: 1,
+    flexDirection: 'row',
+    flexwrap:'wrap'
   },
   subRow: {
-    flex: 1.5,
+   
     backgroundColor: '#34475d',
     height:'70%'
   },
   subRow1: {
-    flex: 1.5,
+   
     backgroundColor: '#27ae61',
     height:'70%'
   },

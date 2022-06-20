@@ -34,41 +34,52 @@ container: {
     paddingHorizontal:0
   },
   footer:{
-    height:'15%',
+    height:'25%',
     justifyContent:'center',
     alignItems:'center',
     position:'relative',
-    paddingHorizontal:0,
-    
+    marginBottom:10,
+    backgroundColor:'white'
   },
   row:{
-    flex:1.5,
-    flexDirection:'row',
-    height:'70%',
-    paddingHorizontal:0
-
-
+    flex:1,
+    flexDirection:'vertical'
   },
   subRow:{
-    flex:0.35,
+   
+    color:'white',
+    fontSize:25,
+    paddingVertical:10,
+    paddingHorizontal:30,
+    borderRadius:20,
     backgroundColor:'#34475d',
-    height:'70%',
-    paddingHorizontal:0
+    textTransform:"uppercase",
+    marginTop:10,
+    marginBottom:10,
+    textAlign:'center',
   },
   subRow1:{
-    flex:0.35,
+    color:'white',
+    fontSize:25,
+    paddingVertical:10,
+    paddingHorizontal:30,
+    borderRadius:20,
     backgroundColor:'#27ae61',
-    height:'70%',
-    paddingHorizontal:0
+    marginTop:10,
+    marginBottom:10,
+    textAlign:'center',
   },
   Text:{
-    textAlign:'center',
-   marginTop:Margin,
-    fontSize:FONT,
     fontWeight:'bold',
     color:'white',
-    
   },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  
   ListContainer: {
     paddingTop: 5,
     paddingBottom: 5,

@@ -18,15 +18,20 @@ import { getUniqueId, getManufacturer } from "react-native-device-info";
 var windowSize = Dimensions.get("window");
 
 const { width } = Dimensions.get("window");
-var FONT = 17;
+var FONT = 0;
 var Margin = 38;
 var textFont = 20;
 var height = 80;
-if (Platform.OS !='web') {
-  (FONT = 12), (Margin = 50), (textFont = 20);
+if (windowSize.width>400) {
+  FONT = 20
   height = 120;
-} else{
-  FONT=20
+} else if(windowSize.width>300 && windowSize.width<400 ){
+  FONT=12
+}else if(windowSize.width<300){
+  FONT=9
+}
+else{
+  FONT=12
 }
 
 
@@ -172,7 +177,7 @@ export default class Options extends Component {
   render() {
    
     return (
-      <Card style={{ flex: 1 }}>
+      <Card style={{ flex: 1 ,backgroundColor:'white'}}>
         <Header
           showBack
           onBackPress={() => this.props.navigation.navigate("Main")}
@@ -190,9 +195,9 @@ export default class Options extends Component {
            
           </Portal>
         ):(
-          <Card>
+          <Card style={{backgroundColor:'white'}}>
             <Card.Content style={styles.nameCard}>
-              <Text>enter your Name: <TextInput
+              <Text>Enter your Name: <TextInput
               style={{
                 height: 60,
                 width: windowSize.width / 6,
@@ -200,7 +205,9 @@ export default class Options extends Component {
                 fontSize: textFont,
                 justifyContent: "center",
                 color: "black",
+                
               }}
+              selectionColor='white'
               placeholder="Name"
               value={this.state.Name}
               returnKeyType="next"
@@ -212,7 +219,7 @@ export default class Options extends Component {
              
             </Card.Content>
             <Card.Content style={styles.cityCard}>
-              <Text>enter your City: <TextInput
+              <Text>Enter your City: <TextInput
               ref="SecondInput"
                         style={{
                           height: 60,
@@ -222,6 +229,7 @@ export default class Options extends Component {
                           justifyContent: "center",
                           color: "black",
                         }}
+                        selectionColor='white'
                         returnKeyType="done"
                         placeholder="City"
                         value={this.state.City}
@@ -234,10 +242,10 @@ export default class Options extends Component {
               </Text>
              
             </Card.Content>
-            <Card style={{flex:1,justifyContent:'center',textAlign:'center',paddingTop:10}}>
+            <Card style={{flex:1,justifyContent:'center',textAlign:'center',paddingTop:10,backgroundColor:'white'}}>
             <Card.Content style={[styles.chooseLeve]}><Text style={[styles.chooseLevelText]}>choose level</Text></Card.Content></Card>
             <Card.Content>
-            
+          
             <Card.Content style={styles.row1}>
               <Card.Content style={styles.row1_column1}>
                 <TouchableOpacity
@@ -410,20 +418,22 @@ export default class Options extends Component {
                   flexDirection: "row",
                   justifyContent: "center",
                   textAlign:'center',
-                  paddingTop:40
+                  paddingTop:40,
+                  display: 'flex',
+                  width:'100%'
                 }}
               >
                 <TouchableOpacity
                   onPress={this.play.bind(this)}
                   style={[styles.shadowProp,{
-                    marginRight:'15%',
-                    marginLeft:'5%',
+                   
+                    marginRight:'5%',
                     height:height,
                     backgroundColor: "#27ae61",
-                    width:"15%",
+                    width:"30%",
                     borderRadius:15,
-                    textAlign:'center',
-                    justifyContent:'center',
+                  
+                    justifyContent:'center'
                   }]}
                 >
                   
@@ -444,12 +454,10 @@ export default class Options extends Component {
                 <TouchableOpacity
                   onPress={this.home.bind(this)}
                   style={[styles.shadowProp,{
-                    width:"15%",
+                    width:"30%",
                     height: height,
                     backgroundColor: "#34475d",
                     borderRadius:15,
-                    marginRight:'5%',
-                    marginleft:'15%',
                     justifyContent:'center',
                     textAlign:'center'
                   }]}

@@ -33,13 +33,18 @@ var SIZE = 4; // four-by-four grid
 
 var CELL_SIZE = 100; // 20% of the screen width
 var WIDTH=0
-if(Platform.OS!='web'){
-  WIDTH=Dimensions.get('window').width/4
-    console.log(WIDTH,'ios')
-}else{
-    WIDTH=Dimensions.get('window').width/8
-    console.log(WIDTH,'web')
+if(windowSize.width>400){
+  WIDTH=Dimensions.get('window').width/7.5
+   
+}else if(windowSize.width>300 && windowSize.width<400){
+    WIDTH=Dimensions.get('window').width/5
+    
+}else if(windowSize.width<300){
+    WIDTH=Dimensions.get('window').width/5.5 
+    height=windowSize.height/2   
 }
+
+
 
 
 
@@ -535,27 +540,28 @@ class Play extends React.Component {
     render() {
        
         return (
-             <Card style={{ flex: 1 }}>
+             <Card style={{ flex: 1 ,backgroundColor:'white'}}>
                 <Header
                     showBack
                     onBackPress={() => this.props.navigation.navigate("Main")}
                     title={'MaxWord'}
                 />
 
-                
-                <Card.Content style={styles.headerRow}>
-                    <Card.Content style={{ height: 50, marginLeft:'34%',alignItems:'flex-start' }}>
+                <Card style={{backgroundColor:'white'}}>
+                <Card.Content style={[styles.headerRow,{justifyContent:'center',alignItems:'center'}]}>
+                    <Card.Content style={{ height: 50,alignItems:'flex-start' }}>
                         <Text allowFontScaling={false} style={styles.Correct}>Score:{this.state.Score}</Text>
                     </Card.Content>
-                    <Card.Content style={{ height: 50,textAlign:'center',marginLeft:'9%',marginRight:'5%' }}>
+                    <Card.Content style={{ height: 50,alignItems:'center' }}>
                         <Text allowFontScaling={false} style={styles.Level}>{this.state.Level}</Text>
                     </Card.Content>
-                    <Card.Content style={{  height: 50 ,marginLeft:'5.5%' }}>
+                    <Card.Content style={{  height: 50 ,alignItems:'flex-end' }}>
                         <Text allowFontScaling={false} style={styles.Time}>Time: {this.state.timeDisplay}</Text>
                     </Card.Content>
                 </Card.Content>
+                </Card>
                 
-            <Card style={{flex:1,justifyContent:'center',alignItems:'center '}}>
+            <Card style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>
             <Card.Content  style={{flex:1,flexWrap:'wrap',padding:2,}}>
             
             <FlatList
@@ -594,19 +600,19 @@ class Play extends React.Component {
           
           
 
-          <Card style={{justifyContent:'center',alignItems:'center'}}>
+          <Card style={{justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>
           <Card.Content>
           <Text style={{fontSize: 25}}>{this.state.value}</Text>
           </Card.Content>
-          <View style={{height:1,width:WIDTH,backgroundColor:'black'}}></View>
+          <View style={{height:1,width:'100%',backgroundColor:'black'}}></View>
           </Card>
 
           
           <Card.Content style={{flexDirection:'row',justifyContent:'center',alignItems:'center' }}>
-              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH,backgroundColor:'#495159',borderRadius:15}} onPress={this.clear.bind(this)}>
+              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495159',borderRadius:15,marginBottom:10,}} onPress={this.clear.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Delete</Text>
               </TouchableOpacity>
-              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH,backgroundColor:'#495150',borderRadius:15}} onPress={this.handleSubmit.bind(this)}>
+              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495150',borderRadius:15,marginBottom:10,}} onPress={this.handleSubmit.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Submit</Text>
               </TouchableOpacity>
             </Card.Content>
@@ -617,7 +623,7 @@ class Play extends React.Component {
                 style={{ flex: 1, justifyContent: 'center' }}
                 contentContainerStyle={{
                     backgroundColor: 'transparent',
-                    width: '50%',
+                    width: '85%',
                     height: '100%',
                     alignSelf: 'center',
                     

@@ -233,13 +233,13 @@ export default class TopScores extends Component {
    
     
     return(
-      <View style={{ flex: 1, }}>
+      <Card style={{ flex: 1, backgroundColor:'white'}}>
         <Header
           showBack
-          onBackPress={() => this.props.navigation.navigate("Main")}
-          title={'Pro Scores'}
+          onBackPress={() => this.props.navigation.goBack()}
+          title={'MyScores'}
         />
-   
+        <Card style={{flex:1}}>
         <View style={styles.container}>
         <View style={styles.body}>
         <View style={{height:60}}>
@@ -258,7 +258,7 @@ export default class TopScores extends Component {
             </View>
           </View>
         </View>
-         <View >
+         <View style={{flex: 1, paddingHorizontal: 0}} >
            <FlatList
             data={this.state.dataSource}
             renderItem={this._renderRow.bind(this)}
@@ -266,23 +266,33 @@ export default class TopScores extends Component {
             
          </View>
         </View>
+        </View>
+        </Card>
         
-        <View style={styles.footer}>
-          <View style={styles.row}>
-          <TouchableOpacity style={styles.subRow} onPress={this.home.bind(this)}>
+        
+        
+     
+     
+      <Card style={[styles.footer,{backgroundColor:'white'}]}>
+        <Card.Content style={styles.row}>
+            <TouchableOpacity style={[styles.subRow,styles.shadowProp]}
+                onPress={this.home.bind(this)}
+            >
                 <Text allowFontScaling={false} style={styles.Text}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.subRow1} onPress={this.reStart.bind(this)}>
-              <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
+            <TouchableOpacity style={[styles.subRow1,styles.shadowProp]}
+                onPress={this.reStart.bind(this)}
+            >
+                <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.subRow} onPress={this.help.bind(this)}>
+            <TouchableOpacity style={[styles.subRow,styles.shadowProp]}
+                onPress={this.help.bind(this)}
+            >
                 <Text allowFontScaling={false} style={styles.Text}>Help</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-        
-      </View>
-      </View>
+        </Card.Content>
+    </Card>
+    </Card>
       );
   }
   

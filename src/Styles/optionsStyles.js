@@ -48,7 +48,7 @@ var styles = StyleSheet.create({
     justifyContent:'center',
     textAlign:'center',
     width: '100%',
-    justifyContent:'center'
+    
   },
   
   row1_column1: {
@@ -73,15 +73,13 @@ var styles = StyleSheet.create({
     height: 100,
     color:'#ffffff',
     fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
+   
     borderRadius:20,
     backgroundColor:"white",
     textTransform:"uppercase",
     marginTop:20,
     marginBottom:10, 
-   marginLeft:'65%',
-   marginRight:'5%',
+   
    justifyContent:'center',
     textAlign:'center',
     borderColor:'black',
@@ -94,8 +92,6 @@ var styles = StyleSheet.create({
     height: 100,
     color:'#ffffff',
     fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
     borderRadius:20,
     backgroundColor:"white",
     borderColor:'black',
@@ -103,9 +99,7 @@ var styles = StyleSheet.create({
     textTransform:"uppercase",
     marginTop:20,
     marginBottom:10,
-   shadowColor:'black',
-    marginRight:'65%',
-    marginLeft:'5%',
+    shadowColor:'black',
     justifyContent:'center',
     textAlign:'center',
    

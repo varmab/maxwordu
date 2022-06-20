@@ -131,10 +131,10 @@ var styles = StyleSheet.create({
     marginTop: 10
   },
   headerRow: {
+    flex:1,
     paddingTop: 5,
     flexDirection: 'row',
-    flexBasis:100,
-    flexWrap:'wrap'
+    
   },
   subBody: {
     flex: 0.38,

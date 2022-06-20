@@ -120,6 +120,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './../Styles/myScoresStyles';
 import { Card, Divider } from 'react-native-paper';
 
+
+var windowSize = Dimensions.get('window');
+
+
+var WIDTH=0
+if(windowSize.width>400){
+  WIDTH=Dimensions.get('window').width/7.5
+   
+}else if(windowSize.width>300 && windowSize.width<400){
+    WIDTH=Dimensions.get('window').width/5
+    
+}else if(windowSize.width<300){
+    WIDTH=Dimensions.get('window').width/5.5 
+    
+}
+
 class MyScores extends Component {
   constructor(props) {
     super(props);
@@ -147,7 +163,7 @@ class MyScores extends Component {
   }
   _renderRow(data) {
     return (
-      <>
+      <Card style={{backgroundColor:'white'}}>
         <Card.Content style={styles.ListContainer}>
           <View style={styles.subContainer}>
             {data.item.Name == null ? (
@@ -166,13 +182,13 @@ class MyScores extends Component {
           </View>
         </Card.Content>
         <Divider style={{ backgroundColor: 'gray' }} />
-      </>
+      </Card>
     )
   }
 
   render() {
     return (
-      <Card.Content style={{ flex: 1, paddingHorizontal: 0 }}>
+      <Card.Content style={{ flex: 1, paddingHorizontal: 0 ,backgroundColor:'white'}}>
         <Header
           showBack
           onBackPress={() => this.props.navigation.goBack()}
@@ -188,16 +204,14 @@ class MyScores extends Component {
           automaticallyAdjustContentInsets={false} />
         </Card.Content>
        
-        <Card.Content style={styles.footer}>
-          <View style={styles.row}>
-            <TouchableOpacity style={styles.subRow} onPress={this.home.bind(this)}>
-              <Text allowFontScaling={false} style={styles.Text}>Home</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.subRow1} onPress={this.reStart.bind(this)}>
-              <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
-            </TouchableOpacity>
-          </View>
-        </Card.Content>
+        <Card.Content style={{flexDirection:'row',justifyContent:'center',alignItems:'center' }}>
+        <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495159',borderRadius:15,marginBottom:10,}} onPress={this.home.bind(this)}>
+          <Text allowFontScaling={false} style={styles.Text}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495150',borderRadius:15,marginBottom:10,}} onPress={this.reStart.bind(this)}>
+          <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
+        </TouchableOpacity>
+      </Card.Content>
 
       </Card.Content>
     );

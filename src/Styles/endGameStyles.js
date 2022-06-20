@@ -8,17 +8,21 @@ console.log(windowSize,'size');
 var FONT   = 0;
 var textFont = 0;
 var Margin = 0;
-if(windowSize>350){
-  FONT   = 20
+var Height=0
+if(windowSize>450){
+  FONT   = 18
   Margin = 38
   textFont=20
-}else if(windowSize<350){
-  FONT = 15
+  Height=130
+}else if(windowSize<450){
+  FONT = 12
   Margin=18
   textFont=12.5
+  Height=160
 }else{
-  FONT=15
+  FONT=12
   Margin=18
+  Height=130
 }
 var styles = StyleSheet.create({
 container: {
@@ -36,46 +40,54 @@ container: {
     flex:.5,
   },
   footer:{
- 
-    height:'19%',
+    height:'25%',
     justifyContent:'center',
     alignItems:'center',
     position:'relative',
-    top:70
-   
-    
+    marginBottom:20
   },
   row:{
-    flex:1.5,
-    flexDirection:'row'
+    flex:1,
+    flexDirection:'vertical'
   },
   subRow:{
-    flex:0.35,
+   
+    color:'white',
+    fontSize:25,
+    paddingVertical:10,
+    paddingHorizontal:30,
+    borderRadius:20,
     backgroundColor:'#34475d',
-    height:'70%'
+    textTransform:"uppercase",
+    marginTop:10,
+    marginBottom:10,
+    textAlign:'center',
   },
   subRow1:{
-    flex:0.35,
+    color:'white',
+    fontSize:25,
+    paddingVertical:10,
+    paddingHorizontal:30,
+    borderRadius:20,
     backgroundColor:'#27ae61',
-    height:'70%'
+    marginTop:10,
+    marginBottom:10,
+    textAlign:'center',
   },
   Text:{
-    textAlign:'center',
-    marginTop:Margin,
-    fontSize:FONT,
     fontWeight:'bold',
-    color:'white'
+    color:'white',
+  
   },
   gameOver:{
     textAlign:'center',
     paddingTop: 20,
-    fontSize:25,
+    fontSize:22,
     fontWeight:'bold'
   },
   Score:{
-    textAlign:'center',
-    marginTop: 10,
-    fontSize:18,
+    
+    fontSize:FONT,
     fontWeight:'bold'
   },
   Level:{
@@ -112,7 +124,72 @@ container: {
     fontSize:17,
     textAlign:'center',
     color:'blue'
-  }
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  row1: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent:'center',
+    textAlign:'center',
+    width: '100%',
+    justifyContent:'center'
+  },
+  
+  row1_column1: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent:'center',
+    textAlign:'center',
+    flex: 1,
+    
+   
+  },
+  row1_column2: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent:'center',
+    textAlign:'center',
+    flex: 1,
+    
+   
+  },
+  blue_column: {
+    backgroundColor: 'blue',
+    height: Height,
+    color:'#ffffff',
+    borderRadius:20,
+    backgroundColor:"white",
+    textTransform:"uppercase",
+    marginTop:20,
+    marginBottom:10, 
+   justifyContent:'center',
+    textAlign:'center',
+    borderColor:'black',
+    borderWidth:1,
+    shadowColor:'black',
+  },
+  
+  green_column: {
+    backgroundColor: 'green',
+    height: Height,
+    color:'#ffffff',
+    borderRadius:20,
+    backgroundColor:"white",
+    borderColor:'black',
+    borderWidth:1,
+    textTransform:"uppercase",
+    marginTop:20,
+    marginBottom:10,
+    shadowColor:'black',
+    justifyContent:'center',
+    textAlign:'center',
+   
+  },
 });
 
 export default styles;
