@@ -7,7 +7,9 @@ import {
   Alert,
   Dimensions,
   Keyboard,
-  Platform
+  Platform,
+  View,
+  ScrollView
 } from "react-native";
 import React, { Component } from "react";
 import { Card, Portal, TextInput } from "react-native-paper";
@@ -19,16 +21,20 @@ var windowSize = Dimensions.get("window");
 
 const { width } = Dimensions.get("window");
 var FONT = 0;
+var WIDTH=0
 var Margin = 38;
 var textFont = 20;
 var height = 80;
 if (windowSize.width>400) {
   FONT = 20
   height = 120;
+  WIDTH=Dimensions.get('window').width/7.5
 } else if(windowSize.width>300 && windowSize.width<400 ){
   FONT=12
+  WIDTH=Dimensions.get('window').width/6
 }else if(windowSize.width<300){
   FONT=9
+  WIDTH=Dimensions.get('window').width/5.5
 }
 else{
   FONT=12
@@ -184,23 +190,61 @@ export default class Options extends Component {
           title={"Options"}
         />
         {this.state.Show ? (
-          <Portal>
-            <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.ScrollArea>
-              <ScrollCard.Content contentContainerStyle={{paddingHorizontal: 24}}>
-              <Text>This is a scrollable area</Text>
-             </ScrollCard.Content>
-          </Dialog.ScrollArea>
-        </Dialog>
-           
-          </Portal>
+          <View style={{ flex: 1, marginTop: 64 }}>
+            <ScrollView
+              ref='scrollView'
+              automaticallyAdjustContentInsets={false}>
+              <View>
+                <Text allowFontScaling={false} style={{ marginTop: 20, marginLeft: 20, marginRight: 20, fontSize: 20 }}>
+                  To play, simply tap on available letters to form words before the tiles fill up. If the word is correct, the letters disappear. A letter can be used more than once, and longer words score higher; “BANANA” scores higher than “BAN”. After all the tiles are filled, you have a few seconds to submit a word or the game ends. There are three levels of play to choose from. Name and City is requested for the leaderboard.
+                </Text>
+                <View>
+                  <Text allowFontScaling={false} style={{ textAlign: 'center', marginTop: 15, fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter your name :</Text>
+                </View>
+                {console.log(this.state.Name,'options')}
+                <TextInput
+                  allowFontScaling={false}
+                  style={styles.textInput}
+                  placeholder="Name"
+                  value={this.state.Name}
+                  returnKeyType='next'
+                  onFocus={this.inputFocused.bind(this, 'Name')}
+                  onSubmitEditing={(event) => {
+                    this.refs.SecondInput.focus();
+                  }}
+                  onChange={this.handleChange.bind(this, 'Name')}
+                />
+                <View>
+                  <Text allowFontScaling={false} style={{ textAlign: 'center', marginTop: 15, fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter your city :</Text>
+                </View>
+                <TextInput
+                  ref='SecondInput'
+                  allowFontScaling={false}
+                  style={styles.textInput}
+                  placeholder="City"
+                  value={this.state.City}
+                  returnKeyType='done'
+                  onFocus={this.inputFocused.bind(this, 'City')}
+                  onSubmitEditing={(event) => {
+                    this.close();
+                  }}
+                  onChange={this.handleChange.bind(this, 'City')}
+                />
+                <TouchableOpacity
+                  onPress={this.close.bind(this)}
+                  style={{ height: 40, marginTop: 30, marginLeft: windowSize.width / 4, marginRight: windowSize.width / 4, backgroundColor: '#27ae61', marginBottom: 30 }}>
+                  <Text allowFontScaling={false} style={{ textAlign: 'center', fontSize: 25, marginTop: 6, color: 'white' }}>OK</Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          </View>
         ):(
           <Card style={{backgroundColor:'white'}}>
             <Card.Content style={styles.nameCard}>
-              <Text>Enter your Name: <TextInput
+              <Text style={{fontWeight:'bold'}}>Enter your Name: <TextInput
               style={{
                 height: 60,
-                width: windowSize.width / 6,
+                width: WIDTH,
                 marginLeft: 10,
                 fontSize: textFont,
                 justifyContent: "center",
@@ -219,11 +263,11 @@ export default class Options extends Component {
              
             </Card.Content>
             <Card.Content style={styles.cityCard}>
-              <Text>Enter your City: <TextInput
+              <Text style={{fontWeight:'bold'}}>Enter your City: <TextInput
               ref="SecondInput"
                         style={{
                           height: 60,
-                          width: windowSize.width / 6,
+                          width: WIDTH,
                           marginLeft: 10,
                           fontSize: textFont,
                           justifyContent: "center",

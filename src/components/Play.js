@@ -22,7 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TimerMixin from 'react-timer-mixin';
 import GLOBAL from './Globals';
 import axios from "axios";
-import Words from '../../assets/Word1';
+import Word8 from "../../assets/Word9"
 
 
 
@@ -37,7 +37,7 @@ if(windowSize.width>400){
   WIDTH=Dimensions.get('window').width/7.5
    
 }else if(windowSize.width>300 && windowSize.width<400){
-    WIDTH=Dimensions.get('window').width/5
+    WIDTH=Dimensions.get('window').width/6
     
 }else if(windowSize.width<300){
     WIDTH=Dimensions.get('window').width/5.5 
@@ -408,7 +408,6 @@ class Play extends React.Component {
     }
     
     wrongWord() {
-        console.log(windowSize.width,windowSize.height,'wrongword function');
         { windowSize.width == 1906 ? (height = windowSize.height / 2) : windowSize.width == 375 ? (height = windowSize.height / 2.62) : (height = windowSize.height / 2.4) }
         return {
             fontSize: WIDTH,
@@ -454,7 +453,7 @@ class Play extends React.Component {
 
                 var text=this.state.value.toUpperCase()
 
-                var results = Words.filter(Word=>Word==text)
+                var results = Word8.filter(Word=>Word==text)
                 
                 
                     if (results.length != 0) {
