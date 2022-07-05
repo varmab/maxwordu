@@ -27,47 +27,24 @@ var styles = StyleSheet.create({
     backgroundColor:"white"
    
   },
-  body:{
-    flex:.30,
-  },
-  footer:{
-    height:'20%',
+
+  button:{
+    flex: 1,
+    flexDirection: 'row',
+    position:'absolute',
     justifyContent:'center',
-    alignItems:'center',
-    position:'relative',
-    top:50
+    bottom:20,
+    left:'50%',
+    transform:[
+    {translateX:'-50%'}]
+    
   },
-  row:{
-    flex:1,
-    flexDirection:'vertical'
-  },
-  subRow:{
-   
-    color:'white',
-    fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
-    borderRadius:20,
-    backgroundColor:'#34475d',
-    textTransform:"uppercase",
-    marginTop:10,
-    marginBottom:10,
-    textAlign:'center',
-  },
-  subRow1:{
-    color:'white',
-    fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
-    borderRadius:20,
-    backgroundColor:'#27ae61',
-    marginTop:10,
-    marginBottom:10,
-    textAlign:'center',
-  },
-  Text:{
+  
+  text_button:{
     fontWeight:'bold',
-    color:'white',
+    color:'white'
+
+    
   
   },
   imageBody:{
@@ -114,44 +91,22 @@ var styles = StyleSheet.create({
     color:'#B2BEB5'
 
   },
-  play:{
-    color:'#ffffff',
-    fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
-    borderRadius:20,
-    backgroundColor:"#BB2CD9",
-    textTransform:"uppercase",
-    marginTop:20,
-    marginBottom:10,
+  
+
+buttonGrad: {
+  height: 100,
+  width: 100,
+  borderRadius: 35,
+  position: 'absolute',
+  bottom: 6,
+  justifyContent:'center',
+  alignItems:'center'
 },
-options:{
-    color:'#ffffff',
-    fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
-    borderRadius:20,
-    backgroundColor:"#BB2CD9",
-    textTransform:"uppercase",
-    marginTop:10,
-    marginBottom:10,
-},
-help:{
-    color:'#ffffff',
-    fontSize:25,
-    paddingVertical:10,
-    paddingHorizontal:30,
-    borderRadius:20,
-    backgroundColor:"#BB2CD9",
-    textTransform:"uppercase",
-    marginTop:10,
-    
-},
-shadowProp: {
-  shadowColor: '#171717',
-  shadowOffset: {width: -2, height: 4},
-  shadowOpacity: 0.2,
-  shadowRadius: 3,
+buttonParent: {
+  height: 100,
+  width: 100,
+  borderRadius: 35,
+  backgroundColor: '#222222',
 },
 });
 export default styles;

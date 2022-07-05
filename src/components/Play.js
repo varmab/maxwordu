@@ -8,7 +8,6 @@ import {
     TextInput,
     TouchableOpacity,
     TouchableHighlight,
-    Alert,
     ScrollView,
     Dimensions,
     Platform,
@@ -25,23 +24,26 @@ import axios from "axios";
 import Word8 from "../../assets/Word9"
 
 
-
-
 var windowSize = Dimensions.get('window');
 var height = windowSize.height 
 var SIZE = 4; // four-by-four grid
 
 var CELL_SIZE = 100; // 20% of the screen width
 var WIDTH=0
-if(windowSize.width>400){
+var  font_size=12 
+if(windowSize.width>420){
   WIDTH=Dimensions.get('window').width/7.5
+  font_size=18
    
-}else if(windowSize.width>300 && windowSize.width<400){
-    WIDTH=Dimensions.get('window').width/6
+}else if(windowSize.width>300 && windowSize.width<420){
+    WIDTH=Dimensions.get('window').width/4.5
+    height=windowSize.height/1.2 
+    font_size=15  
     
 }else if(windowSize.width<300){
-    WIDTH=Dimensions.get('window').width/5.5 
-    height=windowSize.height/2   
+    WIDTH=Dimensions.get('window').width/4.5 
+    height=windowSize.height/1.5  
+    font_size=10 
 }
 
 
@@ -134,6 +136,7 @@ class Play extends React.Component {
             this.setState({ value: '', wrong: Incorrect })
         }, 300);
     }
+    
 
     doRemoveLetters(word) {
         this.setState({
@@ -535,9 +538,11 @@ class Play extends React.Component {
             
         })
     }
+   
     
     render() {
-       
+        
+
         return (
              <Card style={{ flex: 1 ,backgroundColor:'white'}}>
                 <Header
@@ -546,22 +551,29 @@ class Play extends React.Component {
                     title={'MaxWord'}
                 />
 
-                <Card style={{backgroundColor:'white'}}>
+                <Card style={[styles.shadowProp,{backgroundColor:'#e0e0e0',borderWidth:1,borderColor:'black',borderBottomRightRadius:20,borderBottomLeftRadius:20,flex:0.15,marginBottom:10,marginHorizontal:15,borderTopLeftRadius:0,borderTopRightRadius:0}]}>
                 <Card.Content style={[styles.headerRow,{justifyContent:'center',alignItems:'center'}]}>
                     <Card.Content style={{ height: 50,alignItems:'flex-start' }}>
-                        <Text allowFontScaling={false} style={styles.Correct}>Score:{this.state.Score}</Text>
+                        <Text allowFontScaling={false} style={[styles.Correct,{fontSize:font_size}]}>Score:{this.state.Score}</Text>
                     </Card.Content>
-                    <Card.Content style={{ height: 50,alignItems:'center' }}>
-                        <Text allowFontScaling={false} style={styles.Level}>{this.state.Level}</Text>
+                    <Card.Content style={{ height: 50,alignItems:'center'}}>
+                        <Text allowFontScaling={false} style={[styles.Level,{fontSize:font_size}]}>{this.state.Level}</Text>
                     </Card.Content>
                     <Card.Content style={{  height: 50 ,alignItems:'flex-end' }}>
-                        <Text allowFontScaling={false} style={styles.Time}>Time: {this.state.timeDisplay}</Text>
+                        <Text allowFontScaling={false} style={[styles.Time,{fontSize:font_size}]}>Time: {this.state.timeDisplay}</Text>
                     </Card.Content>
                 </Card.Content>
                 </Card>
+
+            <Card.Content style={{justifyContent:'center',alignItems:'center',backgroundColor:'white',height:30,marginTop:20}}>
+          <Card.Content>
+          <Text style={{fontSize: 20}}>{this.state.value}</Text>
+          </Card.Content>
+          <View style={{height:1,width:'20%',backgroundColor:'black'}}></View>
+          </Card.Content>
                 
-            <Card style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>
-            <Card.Content  style={{flex:1,flexWrap:'wrap',padding:2,}}>
+            <Card.Content style={{flex:1,backgroundColor:'White',marginTop:20,justifyContent:'center',alignItems:'center'}}>
+            <Card.Content  style={{flex:1,padding:0,justifyContent:'center'}}>
             
             <FlatList
             
@@ -595,23 +607,18 @@ class Play extends React.Component {
 
             
            
-          </Card>
+          </Card.Content>
           
           
 
-          <Card style={{justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>
-          <Card.Content>
-          <Text style={{fontSize: 25}}>{this.state.value}</Text>
-          </Card.Content>
-          <View style={{height:1,width:'100%',backgroundColor:'black'}}></View>
-          </Card>
+          
 
           
           <Card.Content style={{flexDirection:'row',justifyContent:'center',alignItems:'center' }}>
-              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495159',borderRadius:15,marginBottom:10,}} onPress={this.clear.bind(this)}>
+              <TouchableOpacity disabled={this.state.disabled} style={{flex:0.5,marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495159',borderRadius:15,marginBottom:10,}} onPress={this.clear.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Delete</Text>
               </TouchableOpacity>
-              <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495150',borderRadius:15,marginBottom:10,}} onPress={this.handleSubmit.bind(this)}>
+              <TouchableOpacity disabled={this.state.disabled} style={{flex:0.5,marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495150',borderRadius:15,marginBottom:10,}} onPress={this.handleSubmit.bind(this)}>
                 <Text allowFontScaling={false} style={styles.Text}>Submit</Text>
               </TouchableOpacity>
             </Card.Content>
@@ -685,20 +692,20 @@ const styles1 = StyleSheet.create({
      backgroundColor: '#7B1FA2'
   },
   GridViewTextLayout: {
-     fontSize: 20,
+     fontSize: 30,
      fontWeight: 'bold',
-     justifyContent: 'center',
-     textAlign:'center',
+     justifyContent:'center',
+     alignItems:'center',
      color: '#fff',
      padding: 10,
    },
    gridBox:{
-    margin:2,
+    margin:4,
     width:WIDTH,
     justifyContent:'center',
     alignItems:'center',
-    height:height/6 ,
-    backgroundColor:'black',
+    height:height/5,
+    backgroundColor:"#23C4ED",
     position:'relative',
     borderRadius: 10,
     borderWidth:1,

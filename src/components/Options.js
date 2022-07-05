@@ -9,13 +9,17 @@ import {
   Keyboard,
   Platform,
   View,
-  ScrollView
+  ScrollView,
+  TextInput
 } from "react-native";
 import React, { Component } from "react";
-import { Card, Portal, TextInput } from "react-native-paper";
+import { Card, Portal, } from "react-native-paper";
+import {TextInput as Tp} from "react-native-paper";
 import Header from "./Header";
 import styles from "./../Styles/optionsStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Modal from 'react-native-modalbox';
+
 import { getUniqueId, getManufacturer } from "react-native-device-info";
 var windowSize = Dimensions.get("window");
 
@@ -30,7 +34,7 @@ if (windowSize.width>400) {
   height = 120;
   WIDTH=Dimensions.get('window').width/7.5
 } else if(windowSize.width>300 && windowSize.width<400 ){
-  FONT=12
+  FONT=11
   WIDTH=Dimensions.get('window').width/6
 }else if(windowSize.width<300){
   FONT=9
@@ -201,7 +205,7 @@ export default class Options extends Component {
                 <View>
                   <Text allowFontScaling={false} style={{ textAlign: 'center', marginTop: 15, fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter your name :</Text>
                 </View>
-                {console.log(this.state.Name,'options')}
+               
                 <TextInput
                   allowFontScaling={false}
                   style={styles.textInput}
@@ -241,19 +245,21 @@ export default class Options extends Component {
         ):(
           <Card style={{backgroundColor:'white'}}>
             <Card.Content style={styles.nameCard}>
-              <Text style={{fontWeight:'bold'}}>Enter your Name: <TextInput
+              <Text style={{fontWeight:'bold'}}>Enter your Name: <Tp
               style={{
                 height: 60,
-                width: WIDTH,
+                width: 300,
                 marginLeft: 10,
                 fontSize: textFont,
                 justifyContent: "center",
                 color: "black",
+               
                 
               }}
               selectionColor='white'
               placeholder="Name"
               value={this.state.Name}
+              
               returnKeyType="next"
               onSubmitEditing={(event) => {
                 this.refs.SecondInput.focus();
@@ -263,15 +269,16 @@ export default class Options extends Component {
              
             </Card.Content>
             <Card.Content style={styles.cityCard}>
-              <Text style={{fontWeight:'bold'}}>Enter your City: <TextInput
+              <Text style={{fontWeight:'bold'}}>Enter your City: <Tp
               ref="SecondInput"
                         style={{
                           height: 60,
-                          width: WIDTH,
+                          width: 300,
                           marginLeft: 10,
                           fontSize: textFont,
                           justifyContent: "center",
                           color: "black",
+                          
                         }}
                         selectionColor='white'
                         returnKeyType="done"
@@ -458,23 +465,22 @@ export default class Options extends Component {
             
               <Card.Content
                 style={{
-                  flex: 1,
+                 flex:1,
                   flexDirection: "row",
                   justifyContent: "center",
                   textAlign:'center',
-                  paddingTop:40,
-                  display: 'flex',
-                  width:'100%'
+                 
+                  
                 }}
               >
                 <TouchableOpacity
                   onPress={this.play.bind(this)}
                   style={[styles.shadowProp,{
                    
-                    marginRight:'5%',
-                    height:height,
+                    marginRight:20,
+                    height:70,
                     backgroundColor: "#27ae61",
-                    width:"30%",
+                    flex:0.5,
                     borderRadius:15,
                   
                     justifyContent:'center'
@@ -498,8 +504,8 @@ export default class Options extends Component {
                 <TouchableOpacity
                   onPress={this.home.bind(this)}
                   style={[styles.shadowProp,{
-                    width:"30%",
-                    height: height,
+                   flex:0.5,
+                    height: 70,
                     backgroundColor: "#34475d",
                     borderRadius:15,
                     justifyContent:'center',
@@ -523,7 +529,104 @@ export default class Options extends Component {
                 </TouchableOpacity>
               </Card.Content>
             </Card.Content>
-           
+            <Modal
+            style={[styles.modal, styles.modal3]}
+            position={"center"}
+            ref={"modal3"}
+            backdropPressToClose={false}
+          >
+            <View style={{ flex: 1, width: width - 50 }}>
+              <View style={{ flex: 0.8 }}>
+                <View style={{ justifyContent: "center" }}>
+                  <View>
+                    <Text
+                      allowFontScaling={false}
+                      style={{
+                        textAlign: "center",
+                        marginTop: 15,
+                        fontSize: 17,
+                        fontWeight: "bold",
+                        color: "black",
+                      }}
+                    >
+                      Enter your name :
+                    </Text>
+                  </View>
+                  <TextInput
+                    allowFontScaling={false}
+                    style={styles.textInput}
+                    placeholder="Name"
+                    value={this.state.Name}
+                    placeholderTextColor={"#c0c0c0"}
+                   
+                    returnKeyType="next"
+                    onSubmitEditing={(event) => {
+                      this.refs.SecondInput.focus();
+                    }}
+                    onChange={this.handleChange.bind(this, "Name")}
+                    // onChangeText={text => {
+                    //     onChangeData(text, 'name');
+                    // }}
+                  />
+                </View>
+                <View>
+                  <View>
+                    <Text
+                      allowFontScaling={false}
+                      style={{
+                        textAlign: "center",
+                        fontSize: 17,
+                        fontWeight: "bold",
+                        color: "black",
+                      }}
+                    >
+                      Enter your city :
+                    </Text>
+                  </View>
+                  <TextInput
+                    ref="SecondInput"
+                    allowFontScaling={false}
+                    style={styles.textInput}
+                    placeholder="City"
+                    placeholderTextColor={"#c0c0c0"}
+                    
+                    value={this.state.City}
+                    returnKeyType="done"
+                    onSubmitEditing={(event) => {
+                      Keyboard.dismiss;
+                    }}
+                    onChange={this.handleChange.bind(this, "City")}
+                    // onChangeText={text => {
+                    //     onChangeData(text, 'city');
+                    // }}
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 0.2,
+                  backgroundColor: "#013369",
+                  justifyContent: "center",
+                }}
+              >
+                <TouchableOpacity onPress={this.onOk.bind(this)}>
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      allowFontScaling={false}
+                      style={{ color: "white", textAlign: "center" }}
+                    >
+                      OK
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
            
           </Card>
         )}

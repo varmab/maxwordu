@@ -112,21 +112,21 @@ var styles = StyleSheet.create({
   },
   Correct: {
     // flex: 0.20,
-    fontSize: FONT,
+   
     fontWeight: 'bold',
     marginTop: 10,
     paddingLeft: 8
   },
   Level: {
     // flex: 0.40,
-    fontSize: FONT,
+    
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 10
   },
   Time: {
     // flex: 0.40,
-    fontSize: FONT,
+    
     fontWeight: 'bold',
     marginTop: 10
   },
@@ -246,7 +246,45 @@ var styles = StyleSheet.create({
     fontSize:18,
     
     
-  }
+  },
+  map:{
+    alignSelf:'stretch',
+
+    height:100,
+},
+row1:{
+    marginTop:70,
+    alignSelf:'stretch',
+    flexDirection:'row',
+    justifyContent:'center'
+},
+row2:{
+    marginTop:10,
+    alignSelf:'stretch',
+    flexDirection:'row',
+    justifyContent:'center'
+},
+row3:{
+    marginTop:10,
+    alignSelf:'stretch',
+    flexDirection:'row',
+    justifyContent:'center'
+},
+cell:{
+    maxWidth:90,
+    borderWidth:1,
+    borderColor:'darkgrey',
+    flex:1,
+    aspectRatio:1,
+    margin:3
+    
+},
+shadowProp: {
+  shadowColor: '#171717',
+  shadowOffset: {width: -2, height: 4},
+  shadowOpacity: 0.2,
+  shadowRadius: 3,
+},
 
 });
 export default styles;

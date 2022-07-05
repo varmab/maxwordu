@@ -26,22 +26,23 @@ var styles = StyleSheet.create({
     color:'black'
   },
   modal3: {
-    height: 100,
+    height: windowSize.height/2,
     width: windowSize.width-50
+    
   },
   textInput:{
-     height: 45,
-     paddingLeft:8,
-     marginTop:25,
-     marginLeft:20,
-     marginRight:20,
-     fontSize: 15,
-     borderWidth: 1,
-     borderColor: '#9c9c9c',
-     borderRadius: 5,
-     color: 'black',
-     backgroundColor:'white'
-  },
+    height: 45,
+    paddingLeft:8,
+    marginTop:25,
+    marginLeft:20,
+    marginRight:20,
+    fontSize: 15,
+    borderWidth: 1,
+    borderColor: '#9c9c9c',
+    borderRadius: 5,
+    color: 'black',
+    backgroundColor:'white'
+ },
   row1: {
     display: 'flex',
     flexDirection: 'row',

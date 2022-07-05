@@ -34,12 +34,10 @@ container: {
     paddingHorizontal:0
   },
   footer:{
-    height:'25%',
-    justifyContent:'center',
-    alignItems:'center',
-    position:'relative',
-    marginBottom:10,
-    backgroundColor:'white'
+    height:120,
+    backgroundColor:'white',
+    width:'100%',
+    borderTopWidth:1
   },
   row:{
     flex:1,
@@ -81,17 +79,17 @@ container: {
   },
   
   ListContainer: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderBottomColor: '#eeeeee',
-    borderBottomWidth: 1,
+    
+    paddingBottom: 10,
     flexDirection: 'column',
-    paddingHorizontal:0
+   
   },
   subContainer:{
     flex: 1,
     flexDirection:'row',
-    paddingHorizontal:0
+    paddingHorizontal:0,
+    justifyContent:'center',
+    alignItems:'center'
   },
   maxWordsText:{
     flex: .3,
@@ -124,7 +122,37 @@ container: {
     fontSize:13,
     fontWeight:'bold',
     color:'#f89500'
-  }
+  },
+  buttonGrad: {
+    height: 100,
+    width: 100,
+    borderRadius: 35,
+    position: 'absolute',
+    bottom: 6,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  buttonParent: {
+    height: 100,
+    width: 100,
+    borderRadius: 35,
+    backgroundColor: '#222222',
+  },
+  text_button:{
+    fontWeight:'bold',
+    color:'white'
+  },
+  button:{
+    flex: 1,
+    flexDirection: 'row',
+    position:'absolute',
+    justifyContent:'center',
+    bottom:10,
+    left:'50%',
+    transform:[
+    {translateX:'-50%'}]
+    
+  },
 });
 
 export default styles;

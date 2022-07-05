@@ -88,7 +88,9 @@ container: {
   Score:{
     
     fontSize:FONT,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    justifyContent:'center',
+    alignSelf:'center' 
   },
   Level:{
     marginTop:8,
@@ -189,6 +191,36 @@ container: {
     justifyContent:'center',
     textAlign:'center',
    
+  },
+  buttonGrad: {
+    height: 100,
+    width: 100,
+    borderRadius: 35,
+    position: 'absolute',
+    bottom: 6,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  buttonParent: {
+    height: 100,
+    width: 100,
+    borderRadius: 35,
+    backgroundColor: '#222222',
+  },
+  text_button:{
+    fontWeight:'bold',
+    color:'white'
+  },
+  button:{
+    flex: 1,
+    flexDirection: 'row',
+    position:'absolute',
+    justifyContent:'center',
+    bottom:20,
+    left:'50%',
+    transform:[
+    {translateX:'-50%'}]
+    
   },
 });
 

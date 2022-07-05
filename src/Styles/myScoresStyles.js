@@ -27,13 +27,11 @@ var styles = StyleSheet.create({
   body: {
     flex: 0.85,
   },
-  footer: {
-    height:'15%',
-    justifyContent:'center',
-    alignItems:'center',
-    position:'relative',
-    paddingHorizontal:0,
-    marginBottom:10
+  footer:{
+    height:120,
+    backgroundColor:'white',
+    width:'100%',
+    borderTopWidth:1
   },
   thumbnail: {
     height: 250,
@@ -118,8 +116,6 @@ var styles = StyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 15,
     paddingRight: 20,
-    borderBottomColor: '#eeeeee',
-    borderBottomWidth: 1,
     flexDirection: 'row',
     flex:1
   },
@@ -168,7 +164,37 @@ var styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     color: '#f89500'
-  }
+  },
+  buttonGrad: {
+    height: 100,
+    width: 100,
+    borderRadius: 35,
+    position: 'absolute',
+    bottom: 6,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  buttonParent: {
+    height: 100,
+    width: 100,
+    borderRadius: 35,
+    backgroundColor: '#222222',
+  },
+  text_button:{
+    fontWeight:'bold',
+    color:'white'
+  },
+  button:{
+    flex: 1,
+    flexDirection: 'row',
+    position:'absolute',
+    justifyContent:'center',
+    bottom:10,
+    left:'50%',
+    transform:[
+    {translateX:'-50%'}]
+    
+  },
 });
 
 export default styles;

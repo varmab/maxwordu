@@ -119,6 +119,16 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './../Styles/myScoresStyles';
 import { Card, Divider } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient'
+import Icon from '@expo/vector-icons/FontAwesome'
+
+const home_icon = (
+  <Icon name="home" size={40} color="white"/>)
+
+const restart_icon = (
+  <Icon name="rotate-left" size={40} color="white"/>)
+
+
 
 
 var windowSize = Dimensions.get('window');
@@ -164,7 +174,7 @@ class MyScores extends Component {
   _renderRow(data) {
     return (
       <Card style={{backgroundColor:'white'}}>
-        <Card.Content style={styles.ListContainer}>
+        <Card.Content style={[styles.ListContainer,{borderWidth:1,borderRadius:20,height:60,marginVertical:5}]}>
           <View style={styles.subContainer}>
             {data.item.Name == null ? (
               <Text allowFontScaling={false} style={styles.maxWordsText}>MaxWords {data.item.time}</Text>
@@ -199,19 +209,42 @@ class MyScores extends Component {
         {/* <List data={this.props.route.params.scoreData} /> */}
         <Card.Content style={{paddingHorizontal:0,flex:1}}>
         <FlatList
-          data={this.props.route.params.scoreData}
+          data={this.props.route.params.scoreData.reverse()}
           renderItem={this._renderRow.bind(this)}
           automaticallyAdjustContentInsets={false} />
         </Card.Content>
        
-        <Card.Content style={{flexDirection:'row',justifyContent:'center',alignItems:'center' }}>
-        <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495159',borderRadius:15,marginBottom:10,}} onPress={this.home.bind(this)}>
-          <Text allowFontScaling={false} style={styles.Text}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity disabled={this.state.disabled} style={{marginRight:3,marginLeft:3,marginTop:20,height:80,width:WIDTH+20,backgroundColor:'#495150',borderRadius:15,marginBottom:10,}} onPress={this.reStart.bind(this)}>
-          <Text allowFontScaling={false} style={styles.Text}>Restart</Text>
-        </TouchableOpacity>
-      </Card.Content>
+        <View style={styles.footer}>
+        <View style={[styles.button]}>
+        <View>
+          <TouchableOpacity onPress={this.home.bind(this)}>
+            <View style={styles.buttonParent}>
+              <LinearGradient
+                colors={['#848484', "#535353","#313131"]}
+                style={styles.buttonGrad}
+              >
+                {home_icon}
+                <Text style={styles.text_button}>HOME</Text>
+              </LinearGradient>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+          <TouchableOpacity onPress={this.reStart.bind(this)}>
+            <View style={styles.buttonParent}>
+              <LinearGradient
+                colors={['#848484', "#535353","#313131"]}
+                style={styles.buttonGrad}
+              >
+                {restart_icon}
+                <Text style={styles.text_button}>RESTART</Text>
+              </LinearGradient>
+            </View>
+          </TouchableOpacity>
+        </View>
+        
+      </View>
+      </View>
 
       </Card.Content>
     );
@@ -232,7 +265,7 @@ class List extends React.Component {
     }
   }
   _renderRow(data) {
-    console.log("data");
+    
     return (
       <View style={styles.ListContainer}>
         <View style={styles.subContainer}>
@@ -255,7 +288,8 @@ class List extends React.Component {
       <FlatList
         data={this.state.dataSource}
         renderItem={this._renderRow.bind(this)}
-        automaticallyAdjustContentInsets={false} />
+        automaticallyAdjustContentInsets={false}
+        inverted={true} />
     )
   }
 }
