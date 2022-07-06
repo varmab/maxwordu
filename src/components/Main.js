@@ -10,7 +10,8 @@ import {
     Alert,
     ScrollView,
     Dimensions,
-    Keyboard
+    Keyboard,
+    SafeAreaView
 } from 'react-native'
 import Modal from 'react-native-modalbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -176,7 +177,7 @@ export default class Main extends React.Component {
           <Card style={{ flex: 1 }}>
             
            
-              <View style={{ flex: 1, backgroundColor: "white" }}>
+              <SafeAreaView style={{ flex: 1, backgroundColor: "white",marginTop:20 }}>
                 <ScrollView
                   // ref={scrollRef}
                   ref="scrollView"
@@ -285,11 +286,11 @@ export default class Main extends React.Component {
                     </TouchableOpacity>
                   </View>
                 </ScrollView>
-              </View>
+              </SafeAreaView>
               </Card>)
               }else{
               return(
-              <View style={styles.container}>
+              <View style={[styles.container,{backgroundColor:"#5DA3FA"}]}>
                 <View
                   style={{
                     flex: 0.3,
@@ -299,7 +300,7 @@ export default class Main extends React.Component {
                 >
                   <Text
                     allowFontScaling={false}
-                    style={{ fontSize:Font_main, fontWeight: "bold" ,fontStyle:'italic',color:'#495150'}}
+                    style={{ fontSize:Font_main, fontWeight: "bold" ,fontStyle:'italic',color:'#120E43'}}
                   >
                     MaxWord
                   </Text>
@@ -328,7 +329,7 @@ export default class Main extends React.Component {
                   />
                 </View>
                 <View>
-                  <Text style={styles.version_text}>
+                  <Text style={[styles.version_text,{color:'#120E43'}]}>
                     Version {env.APP_VERSION}
                   </Text>
                 </View>

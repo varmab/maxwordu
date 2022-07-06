@@ -36,7 +36,7 @@ var styles = StyleSheet.create({
     bottom:20,
     left:'50%',
     transform:[
-    {translateX:'-50%'}]
+    {translateX:"-50%"}]
     
   },
   

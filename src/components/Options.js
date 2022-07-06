@@ -302,6 +302,7 @@ export default class Options extends Component {
                 <TouchableOpacity
                   style={[styles.blue_column,styles.shadowProp]}
                   onPress={this.select.bind(this, "Beginner")}
+                  
                 >
                   <Card.Content
                     style={{
@@ -328,6 +329,7 @@ export default class Options extends Component {
                   >
                     {this.state.Level == "Beginner" ? (
                       <Image
+                      
                         style={{ height: 30, width: 30 }}
                         source={require("../../assets/check.png")}
                       />

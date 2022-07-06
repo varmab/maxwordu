@@ -108,18 +108,17 @@ export class EndGame extends Component {
   }
 
  
-  UNSAFE_componentWillMount() {
-    // this.getASyncData()
-    // console.log(this.props.route.params, "props");
-    //  alert("Level:"+this.props.Level)
+  async componentDidMount() {
+    
     if (this.props.userId != undefined) {
-      fetch('http://www.maxword.net/api/user/rank/' + this.props.udid + '/' + this.props.Level)
-        .then((response) => response.json())
+      axios.get('https://maxword.net/.netlify/functions/server/api/user/rank/' + this.props.udid + '/' + this.props.Level)
+      
+        
         .then((responseJson) => {
+          console.log(responseJson,'Rank')
+          this.setState({ Rank: responseJson.data.User.rank })
           
-          this.setState({ Rank: responseJson.User.rank })
-          console.log(response,'$$$$rank$$$$$')
-        })
+        }).catch((err)=>{console.log(err)})
     } else {
       this.setState({ Rank: 'NA'})
     }
@@ -137,26 +136,28 @@ export class EndGame extends Component {
       this.state.scoreData.push(...parse)
     }
     
-    // this.test()
-    // fetch('http://www.maxword.net/api/getTopScore')
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     this.setState({ topScore: responseJson.Score[0].totalScore })
-    //   })
+    this.test()
+    axios.get('https://maxword.net/.netlify/functions/server/api/getTopScore')
+      
+      
+      .then((responseJson) => {
+        console.log(responseJson.data.Score[0].totalScore,'play scores')
+        this.setState({ topScore: responseJson.data.Score[0].totalScore })
+      }).catch((err)=>{console.log(err)})
   }
 
 
 
-  // topScore() {
-  //   // alert("Level:"+this.props.Level)
-  //   if (this.props.Level == 'GameDay') {
-  //     var Level = "gameOfTheDay"
-  //   } else {
-  //     var Level = this.props.route.params.Level
-  //   }
+  topScore() {
+    // alert("Level:"+this.props.Level)
+    if (this.props.Level == 'GameDay') {
+      var Level = "gameOfTheDay"
+    } else {
+      var Level = this.props.route.params.Level
+    }
    
-  //   this.props.navigation.navigate('TopScores',{Score:this.props.route.params.scores,name: this.props.route.params.Name,city: this.props.route.params.City,Level:this.props.route.params.Level,time: this.props.route.params.time});
-  // }
+    this.props.navigation.navigate('TopScores',{Score:this.props.route.params.scores,name: this.props.route.params.Name,city: this.props.route.params.City,Level:this.props.route.params.Level,time: this.props.route.params.time});
+  }
 
   FB() {
      var tmp = this;
@@ -235,7 +236,7 @@ export class EndGame extends Component {
       
           <View style={{flex:0.5,justifyContent:'center',alignItems:'center',marginBottom:Margin_botton}}>
           <View style={{paddingBottom:5}}> 
-          <FontAwesome.Button  backgroundColor="red" onPress={alert("top scores will release shortly")}>
+          <FontAwesome.Button  backgroundColor="red" onPress={this.topScore.bind(this)}>
           Show Top Scores
           </FontAwesome.Button>
           </View>  

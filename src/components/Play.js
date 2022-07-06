@@ -498,7 +498,7 @@ class Play extends React.Component {
         scoreArray.push({ "score": scores, "level": Level });
         axios({
         method:'post',
-        url:('http://www.maxword.net/api/addUser'),
+        url:('https://maxword.net/.netlify/functions/server/api/addUser'),
         data:({ 'name': Name, 'city': City, "udId": this.state.uuid, "scores": scoreArray }),
         headers:{
             'Accept': 'application/json',
@@ -544,14 +544,14 @@ class Play extends React.Component {
         
 
         return (
-             <Card style={{ flex: 1 ,backgroundColor:'white'}}>
+             <Card style={{ flex: 1 ,backgroundColor:'#1B98F5'}}>
                 <Header
                     showBack
                     onBackPress={() => this.props.navigation.navigate("Main")}
                     title={'MaxWord'}
                 />
 
-                <Card style={[styles.shadowProp,{backgroundColor:'#e0e0e0',borderWidth:1,borderColor:'black',borderBottomRightRadius:20,borderBottomLeftRadius:20,flex:0.15,marginBottom:10,marginHorizontal:15,borderTopLeftRadius:0,borderTopRightRadius:0}]}>
+                <Card style={[styles.shadowProp,{backgroundColor:'#207398',borderWidth:1,borderColor:'black',borderBottomRightRadius:20,borderBottomLeftRadius:20,flex:0.15,marginBottom:10,marginHorizontal:15,borderTopLeftRadius:0,borderTopRightRadius:0}]}>
                 <Card.Content style={[styles.headerRow,{justifyContent:'center',alignItems:'center'}]}>
                     <Card.Content style={{ height: 50,alignItems:'flex-start' }}>
                         <Text allowFontScaling={false} style={[styles.Correct,{fontSize:font_size}]}>Score:{this.state.Score}</Text>
@@ -565,7 +565,7 @@ class Play extends React.Component {
                 </Card.Content>
                 </Card>
 
-            <Card.Content style={{justifyContent:'center',alignItems:'center',backgroundColor:'white',height:30,marginTop:20}}>
+            <Card.Content style={{justifyContent:'center',alignItems:'center',backgroundColor:'#1B98F5',height:30,marginTop:20}}>
           <Card.Content>
           <Text style={{fontSize: 20}}>{this.state.value}</Text>
           </Card.Content>

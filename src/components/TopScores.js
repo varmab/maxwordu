@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, FlatList, TouchableOpacity, LogBox } from 'react-native'
 import React, { Component } from 'react'
 import Header from './Header';
 import styles from '../Styles/topScoresStyles'
@@ -43,15 +43,15 @@ export default class TopScores extends Component {
   reStart(){
     this.props.navigation.replace('PlayNow');
   }
-  UNSAFE_componentWillMount(){
+  componentDidMount(){
     
-    axios.get('http://www.maxword.net/api/getscores/'+this.props.route.params.Level)
+    axios.get('https://maxword.net/.netlify/functions/server/api/getscores/'+this.props.route.params.Level)
     .then((responseJson) => {
       // console.log(responseJson.data.Score)
       this.setState({
        dataSource: responseJson.data.Score.slice(0,30)
      })
-     })
+     }).catch((err)=>{console.log(err);})
       
   
   }
