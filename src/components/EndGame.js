@@ -108,13 +108,15 @@ export class EndGame extends Component {
   }
 
  
-  async componentDidMount() {
+  UNSAFE_componentWillMount() {
     
     if (this.props.userId != undefined) {
-      axios.get('https://maxword.net/.netlify/functions/server/api/user/rank/' + this.props.udid + '/' + this.props.Level)
+      axios({
       
-        
-        .then((responseJson) => {
+        method:'get',
+        url:('https://maxword.net/.netlify/functions/server/api/user/rank/' + this.props.udid + '/' + this.props.Level)
+      
+    }).then((responseJson) => {
           console.log(responseJson,'Rank')
           this.setState({ Rank: responseJson.data.User.rank })
           

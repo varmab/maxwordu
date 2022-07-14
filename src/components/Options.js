@@ -29,16 +29,20 @@ var WIDTH=0
 var Margin = 38;
 var textFont = 20;
 var height = 80;
-if (windowSize.width>400) {
+var box_height=35;
+if (windowSize.width>420) {
   FONT = 20
   height = 120;
+  box_height=40
   WIDTH=Dimensions.get('window').width/7.5
-} else if(windowSize.width>300 && windowSize.width<400 ){
+} else if(windowSize.width>300 && windowSize.width<420 ){
   FONT=11
+  box_height=30
   WIDTH=Dimensions.get('window').width/6
 }else if(windowSize.width<300){
-  FONT=9
+  FONT=10
   WIDTH=Dimensions.get('window').width/5.5
+  box_height=25
 }
 else{
   FONT=12
@@ -243,13 +247,13 @@ export default class Options extends Component {
             </ScrollView>
           </View>
         ):(
-          <Card style={{backgroundColor:'white'}}>
+          <Card.Content style={{backgroundColor:'white'}}>
             <Card.Content style={styles.nameCard}>
               <Text style={{fontWeight:'bold'}}>Enter your Name: <Tp
               style={{
                 height: 60,
                 width: 300,
-                marginLeft: 10,
+                marginLeft: 0,
                 fontSize: textFont,
                 justifyContent: "center",
                 color: "black",
@@ -274,7 +278,7 @@ export default class Options extends Component {
                         style={{
                           height: 60,
                           width: 300,
-                          marginLeft: 10,
+                          marginLeft: 6,
                           fontSize: textFont,
                           justifyContent: "center",
                           color: "black",
@@ -292,44 +296,49 @@ export default class Options extends Component {
               
               </Text>
              
-            </Card.Content>
-            <Card style={{flex:1,justifyContent:'center',textAlign:'center',paddingTop:10,backgroundColor:'white'}}>
-            <Card.Content style={[styles.chooseLeve]}><Text style={[styles.chooseLevelText]}>choose level</Text></Card.Content></Card>
-            <Card.Content>
+            
+            <Card.Content style={{flex:1,justifyContent:'center',textAlign:'center',paddingTop:10,backgroundColor:'white'}}>
+            <Card.Content style={[styles.chooseLeve]}><Text style={[styles.chooseLevelText]}>choose level</Text></Card.Content></Card.Content>
+           
           
             <Card.Content style={styles.row1}>
               <Card.Content style={styles.row1_column1}>
                 <TouchableOpacity
+                
                   style={[styles.blue_column,styles.shadowProp]}
                   onPress={this.select.bind(this, "Beginner")}
                   
                 >
+                
                   <Card.Content
                     style={{
                       
-                      height: 40,
+                      height: box_height,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
+                  
                     <Text
                       allowFontScaling={false}
                       style={{ fontSize: FONT,justifyContent:"center",textAlign:'center' }}
                     >
                       Beginner
                     </Text>
+                  
                   </Card.Content>
+             
                   <Card.Content
                     style={{
                       
-                      height: 40,
+                      
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
                     {this.state.Level == "Beginner" ? (
                       <Image
-                      
+                        
                         style={{ height: 30, width: 30 }}
                         source={require("../../assets/check.png")}
                       />
@@ -348,7 +357,7 @@ export default class Options extends Component {
                   <Card.Content
                     style={{
                       
-                      height: 40,
+                      height: box_height,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -363,7 +372,7 @@ export default class Options extends Component {
                   <Card.Content
                     style={{
                      
-                      height: 40,
+                     
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -389,7 +398,7 @@ export default class Options extends Component {
                   <Card.Content
                     style={{
                       
-                      height: 40,
+                      height: box_height,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -404,7 +413,7 @@ export default class Options extends Component {
                   <Card.Content
                     style={{
                      
-                      height: 40,
+                     
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -428,7 +437,7 @@ export default class Options extends Component {
                   <Card.Content
                     style={{
                       
-                      height: 40,
+                      height: box_height,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -443,7 +452,7 @@ export default class Options extends Component {
                   <Card.Content
                     style={{
                      
-                      height: 40,
+                      
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -462,75 +471,11 @@ export default class Options extends Component {
             </Card.Content>
          
             </Card.Content>
-            <Card.Content>
             
             
-              <Card.Content
-                style={{
-                 flex:1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  textAlign:'center',
-                 
-                  
-                }}
-              >
-                <TouchableOpacity
-                  onPress={this.play.bind(this)}
-                  style={[styles.shadowProp,{
-                   
-                    marginRight:20,
-                    height:70,
-                    backgroundColor: "#27ae61",
-                    flex:0.5,
-                    borderRadius:15,
-                  
-                    justifyContent:'center'
-                  }]}
-                >
-                  
-                    <Text
-                      allowFontScaling={false}
-                      style={{
-                       justifyContent:'center',
-                       textAlign:'center',
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: FONT,
-                      }}
-                    >
-                      Play Now
-                    </Text>
-                 
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={this.home.bind(this)}
-                  style={[styles.shadowProp,{
-                   flex:0.5,
-                    height: 70,
-                    backgroundColor: "#34475d",
-                    borderRadius:15,
-                    justifyContent:'center',
-                    textAlign:'center'
-                  }]}
-                >
-                  
-                    <Text
-                      allowFontScaling={false}
-                      style={{
-                        justifyContent:'center',
-                        textAlign:'center',
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: FONT,
-                      }}
-                    >
-                      Home
-                    </Text>
-                 
-                </TouchableOpacity>
-              </Card.Content>
-            </Card.Content>
+            
+            
+        
             <Modal
             style={[styles.modal, styles.modal3]}
             position={"center"}
@@ -629,8 +574,76 @@ export default class Options extends Component {
               </View>
             </View>
           </Modal>
+
+          <Card.Content
+            style={{
+             flex:1,
+              flexDirection: "row",
+              justifyContent: "center",
+              textAlign:'center',
+              marginTop:"3%",
+              marginBottom:10
+             
+              
+            }}
+          >
+            <TouchableOpacity
+              onPress={this.play.bind(this)}
+              style={[styles.shadowProp,{
+               
+                marginRight:20,
+                height:70,
+                backgroundColor: "#27ae61",
+                flex:0.5,
+                borderRadius:15,
+              
+                justifyContent:'center'
+              }]}
+            >
+              
+                <Text
+                  allowFontScaling={false}
+                  style={{
+                   justifyContent:'center',
+                   textAlign:'center',
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: FONT,
+                  }}
+                >
+                  Play Now
+                </Text>
+             
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.home.bind(this)}
+              style={[styles.shadowProp,{
+               flex:0.5,
+                height: 70,
+                backgroundColor: "#34475d",
+                borderRadius:15,
+                justifyContent:'center',
+                textAlign:'center'
+              }]}
+            >
+              
+                <Text
+                  allowFontScaling={false}
+                  style={{
+                    justifyContent:'center',
+                    textAlign:'center',
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: FONT,
+                  }}
+                >
+                  Home
+                </Text>
+             
+            </TouchableOpacity>
+          </Card.Content>
            
-          </Card>
+          </Card.Content>
         )}
         
       

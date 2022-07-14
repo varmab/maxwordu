@@ -24,6 +24,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Icon from '@expo/vector-icons/FontAwesome'
 
 
+
 const { width, height } = Dimensions.get('window');
 var windowSize = Dimensions.get('window');
 console.log(windowSize.height,'sizeheight @@@@@');
@@ -35,7 +36,7 @@ var icon_size=35
 if(windowSize.width >400){
   FONT   = 30,
   Margin = 40 , 
-  Font_main=70,
+  Font_main=80,
   icon_size=40 
 }if(windowSize.width < 350){
   font = 18,
@@ -290,7 +291,7 @@ export default class Main extends React.Component {
               </Card>)
               }else{
               return(
-              <View style={[styles.container,{backgroundColor:"#5DA3FA"}]}>
+              <View style={[styles.container,{backgroundColor:"white"}]}>
                 <View
                   style={{
                     flex: 0.3,
@@ -300,7 +301,7 @@ export default class Main extends React.Component {
                 >
                   <Text
                     allowFontScaling={false}
-                    style={{ fontSize:Font_main, fontWeight: "bold" ,fontStyle:'italic',color:'#120E43'}}
+                    style={{ fontSize:Font_main, fontWeight: "bold" ,fontStyle:'italic',color:'#23C4ED'}}
                   >
                     MaxWord
                   </Text>

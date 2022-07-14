@@ -31,17 +31,19 @@ var SIZE = 4; // four-by-four grid
 var CELL_SIZE = 100; // 20% of the screen width
 var WIDTH=0
 var  font_size=12 
+var tiles_center=""
 if(windowSize.width>420){
   WIDTH=Dimensions.get('window').width/7.5
   font_size=18
+  tiles_center='center'
    
 }else if(windowSize.width>300 && windowSize.width<420){
-    WIDTH=Dimensions.get('window').width/4.5
+    WIDTH=Dimensions.get('window').width/4.8
     height=windowSize.height/1.2 
     font_size=15  
     
 }else if(windowSize.width<300){
-    WIDTH=Dimensions.get('window').width/4.5 
+    WIDTH=Dimensions.get('window').width/5.1
     height=windowSize.height/1.5  
     font_size=10 
 }
@@ -505,10 +507,9 @@ class Play extends React.Component {
             'Content-Type': 'application/json',
         },
     }).then((response) => {
-    
-                
+                console.log(response.data.message._id,'json')
                 var userId = JSON.stringify(response.data.message._id)
-                console.log(userId,'json')
+                
                 this.setState({
                     animated: false,
                     transparent: false,
@@ -544,14 +545,14 @@ class Play extends React.Component {
         
 
         return (
-             <Card style={{ flex: 1 ,backgroundColor:'#1B98F5'}}>
+             <Card style={{ flex: 1 ,backgroundColor:'white'}}>
                 <Header
                     showBack
                     onBackPress={() => this.props.navigation.navigate("Main")}
                     title={'MaxWord'}
                 />
 
-                <Card style={[styles.shadowProp,{backgroundColor:'#207398',borderWidth:1,borderColor:'black',borderBottomRightRadius:20,borderBottomLeftRadius:20,flex:0.15,marginBottom:10,marginHorizontal:15,borderTopLeftRadius:0,borderTopRightRadius:0}]}>
+                <Card style={[styles.shadowProp,{backgroundColor:'white',borderWidth:1,borderColor:'black',borderBottomRightRadius:20,borderBottomLeftRadius:20,flex:0.15,marginBottom:10,marginHorizontal:15,borderTopLeftRadius:0,borderTopRightRadius:0}]}>
                 <Card.Content style={[styles.headerRow,{justifyContent:'center',alignItems:'center'}]}>
                     <Card.Content style={{ height: 50,alignItems:'flex-start' }}>
                         <Text allowFontScaling={false} style={[styles.Correct,{fontSize:font_size}]}>Score:{this.state.Score}</Text>
@@ -565,15 +566,15 @@ class Play extends React.Component {
                 </Card.Content>
                 </Card>
 
-            <Card.Content style={{justifyContent:'center',alignItems:'center',backgroundColor:'#1B98F5',height:30,marginTop:20}}>
+            <Card.Content style={{justifyContent:'center',alignItems:'center',backgroundColor:'white',height:30,marginTop:20}}>
           <Card.Content>
           <Text style={{fontSize: 20}}>{this.state.value}</Text>
           </Card.Content>
           <View style={{height:1,width:'20%',backgroundColor:'black'}}></View>
           </Card.Content>
                 
-            <Card.Content style={{flex:1,backgroundColor:'White',marginTop:20,justifyContent:'center',alignItems:'center'}}>
-            <Card.Content  style={{flex:1,padding:0,justifyContent:'center'}}>
+            <Card.Content style={{flex:1,marginTop:20,justifyContent:'center',alignItems:tiles_center}}>
+            
             
             <FlatList
             
@@ -594,7 +595,7 @@ class Play extends React.Component {
             
             />
             
-            </Card.Content>
+           
             {this.state.wrong == 'yes' ? (
                 
                 <Modal visible={this.state.visibleCross} 
@@ -696,7 +697,7 @@ const styles1 = StyleSheet.create({
      fontWeight: 'bold',
      justifyContent:'center',
      alignItems:'center',
-     color: '#fff',
+     color: 'black',
      padding: 10,
    },
    gridBox:{

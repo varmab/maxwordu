@@ -76,7 +76,7 @@ var styles = StyleSheet.create({
     fontSize:25,
    
     borderRadius:20,
-    backgroundColor:"white",
+    backgroundColor:"#CAD5E2",
     textTransform:"uppercase",
     marginTop:20,
     marginBottom:10, 
@@ -94,7 +94,7 @@ var styles = StyleSheet.create({
     color:'#ffffff',
     fontSize:25,
     borderRadius:20,
-    backgroundColor:"white",
+    backgroundColor:"#CAD5E2",
     borderColor:'black',
     borderWidth:1,
     textTransform:"uppercase",

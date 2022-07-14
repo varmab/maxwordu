@@ -16,8 +16,11 @@ const restart_icon = (
 
 const help_icon = (
   <Icon name="question" size={40} color="white"/>)
+ 
 
-
+ 
+  
+  
 export default class TopScores extends Component {
   constructor(props){
   super(props);
@@ -43,13 +46,15 @@ export default class TopScores extends Component {
   reStart(){
     this.props.navigation.replace('PlayNow');
   }
+  
+  
   componentDidMount(){
     
     axios.get('https://maxword.net/.netlify/functions/server/api/getscores/'+this.props.route.params.Level)
     .then((responseJson) => {
-      // console.log(responseJson.data.Score)
+    
       this.setState({
-       dataSource: responseJson.data.Score.slice(0,30)
+       dataSource: responseJson.data.Score
      })
      }).catch((err)=>{console.log(err);})
       
@@ -59,10 +64,10 @@ export default class TopScores extends Component {
   _renderRow(data){
     // console.log(data,"id extract"); 
     
-    var date = moment(data.item.createdDate).format('MMM YYYY')
+    var date = moment(data.item.createdDate).format('MMM DD')
     return(
       
-       <Card.Content style={[styles.ListContainer,{borderWidth:1,borderRadius:20,height:60,marginVertical:5}]} >
+       <Card.Content style={[styles.ListContainer,{borderWidth:1,height:35,}]} >
         <View style={[styles.subContainer]}>
         {data.item.name == null ?(
           <Text allowFontScaling={false} style={styles.maxWordsText}>MaxWords</Text>
@@ -90,7 +95,7 @@ export default class TopScores extends Component {
         <Header
           showBack
           onBackPress={() => this.props.navigation.goBack()}
-          title={'MyScores'}
+          title={`Weekly Top ${this.props.route.params.Level} Scores`}
         />
         <Card style={{flex:1}}>
         <View style={styles.container}>
